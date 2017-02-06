@@ -1,0 +1,39 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Formato de Preinscripción</h3>
+	</div>
+	<div class="panel-body">
+		<form #nuevoAlumnoForm='ngForm' (submit)='guardarAlumno()'>
+			<div class="form-group col-md-6">
+				<label for="">Nombre</label>
+				<input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Nombre"
+				[(ngModel)]='nuevoAlumno.Nombre' #Nombre='ngModel' >
+			</div>
+			<div class="form-group col-md-6">
+				<label for="">Apellido Paterno</label>
+				<input type="text" class="form-control" id="ApellidoP" name="ApellidoP" placeholder="Apellido Paterno"
+				[(ngModel)]='nuevoAlumno.ApellidoP' #ApellidoP='ngModel' >
+			</div>
+			<div class="form-group col-md-6">
+				<label for="">Apellido Materno</label>
+				<input type="text" class="form-control" id="ApellidoM" name="ApellidoM" placeholder="Apellido Materno"
+				[(ngModel)]='nuevoAlumno.ApellidoM' #ApellidoM='ngModel' >
+			</div>
+			<div class="form-group col-md-6">
+				<label for="">FechaNac</label>
+				<input type="date" class="form-control" id="FechaNac" name="FechaNac" placeholder="Fecha de Nacimiento"
+				[(ngModel)]='nuevoAlumno.FechaNac' #FechaNac='ngModel' >
+			</div>
+			<div class="form-group col-md-6">
+				<label for="">Carrera</label>
+				<select name="Carrera_ID" id="Carrera" class="form-control" required="required"
+				[(ngModel)]='nuevoAlumno._carrera' #_carrera='ngModel'>
+					<option *ngFor='let carrera of Carreras' [value]='carrera._id'>{{carrera.nombre}}</option>
+				</select>
+			</div>
+			<div class="col-md-12">
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			</div>
+		</form>
+	</div>
+</div>
