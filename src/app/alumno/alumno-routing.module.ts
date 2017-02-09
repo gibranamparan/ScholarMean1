@@ -5,7 +5,8 @@ import { AlumnoCreateComponent } from './alumno-create/alumno-create.component';
 
 const routes: Routes = [
 	{ path: 'alumno', component: AlumnoComponent },
-	{ path: 'createAlumno', component: AlumnoCreateComponent },    
+	{ path: 'createAlumno', component: AlumnoCreateComponent },
+	{ path: 'createAlumno/:id', component: AlumnoCreateComponent },    
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

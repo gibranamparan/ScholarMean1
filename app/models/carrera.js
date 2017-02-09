@@ -4,7 +4,8 @@ var Schema       = mongoose.Schema;
 var CarreraSchema   = new Schema({
     nombre: String,
     abreviacion: String,
-    _alumnos : [{ type: Schema.Types.ObjectId, ref: 'Alumno' }]
+    _alumnos : [{ type: Schema.Types.ObjectId, ref: 'Alumno' }],
+    _grupos : [{ type: Schema.Types.ObjectId, ref: 'Grupo' }]
 },
 {
   timestamps: true

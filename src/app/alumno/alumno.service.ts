@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
 import {Http} from '@angular/http'
 import 'rxjs/add/operator/map'
+import { GlobalParamsService } from '../global-params.service';
 
 @Injectable()
 export class AlumnoService {
 
-  constructor(private _http:Http) {}
+  constructor(private _http:Http,
+		private _globalParams:GlobalParamsService) {}
 
-	private domain='http://localhost:8000/api/Alumno/'
+	private apiURL = '/api/Alumno/';
+	private domain=this._globalParams.domain+this.apiURL;
 
 	getAlumnos(){
 		return this._http.get(this.domain)
+		.map(res=>res.json())
+	}
+
+	getAlumno(id){
+		return this._http.get(this.domain+id)
 		.map(res=>res.json())
 	}
 

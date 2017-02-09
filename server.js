@@ -26,14 +26,16 @@ app.use(function(req, res, next) {
   next();
 });
 
-// Set our api routes taking socket server as argument
 var carreraRouterDB = require('./server/routes/CarreraRoutes')(io);
 var routerCarrera = carreraRouterDB.router; //Se toma la ruta
 var CarreraModel = carreraRouterDB.model; //Se toma el modelo
+
 var routerGrupo = require('./server/routes/GrupoRoutes')(io);
+var routerGrupo = routerGrupo.router; //Se toma la ruta
+var GrupoModel = routerGrupo.model; //Se toma el modelo
 
 //Las rutas de alumno ocupan del modelo de carrera
-var routerAlumno = require('./server/routes/AlumnoRoutes')(io,CarreraModel);
+var routerAlumno = require('./server/routes/AlumnoRoutes')(io,CarreraModel,GrupoModel);
 
 //Se asocian las rutas de las entidades a cada 
 app.use('/api', routerCarrera);

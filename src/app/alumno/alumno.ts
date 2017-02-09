@@ -1,6 +1,7 @@
 import { Carrera } from '../carrera/carrera';
 
 export class Alumno{
+ 	Apellido:string;
 	constructor(
 		public _id?:string,
 		public Nombre?:string,
@@ -9,5 +10,5 @@ export class Alumno{
 		public FechaNac?:string,
 		public _carrera?:Carrera,
 		public createdAt?:Date
-	){}
+	){ }
 }

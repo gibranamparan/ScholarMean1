@@ -1,17 +1,20 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Carrera } from './carrera';
 import { CarreraService } from './carrera-service.service';
+//Importanciones para hacer funcionar modal.
 import { SimpleNotificationsComponent, NotificationsService } from 'angular2-notifications';
 import { Overlay, OverlayRenderer } from 'angular2-modal';
-import { Modal } from 'angular2-modal/plugins/bootstrap'
-//import * as io from 'socket.io-client';
+import { Modal } from 'angular2-modal/plugins/bootstrap';
+import { GlobalParamsService } from '../global-params.service';
 
 @Component({
 	templateUrl: 'carreraIndex.html'
 })
 export class CarreraComponent implements OnInit {
-  constructor(private _carreraService : CarreraService,
+  constructor(private _globalParams:GlobalParamsService,
+    private _carreraService : CarreraService,
     private _notificationsService : NotificationsService,
+    //Instancias para hacer funcionar modal
     overlay: Overlay, vcRef: ViewContainerRef, public modal:Modal){
       overlay.defaultViewContainer = vcRef;
   }
@@ -19,13 +22,10 @@ export class CarreraComponent implements OnInit {
   public carreras:Carrera[];
   public carreraSelected:Carrera;
   public accionForm='Agregar';
-  public notifOptions = { //Opciones de notificacion
-    position: ["top", "right"], timeOut: 2000,
-    lastOnBottom: true
-  }
+  public notifOptions = this._globalParams.notificationOptions;
 
   io = require("socket.io-client");
-  socket = this.io('http://localhost:8000');
+  socket = this.io(this._globalParams.domain);
 
   ngOnInit(){
   	this.showCarreras();

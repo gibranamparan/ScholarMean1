@@ -1,4 +1,4 @@
-module.exports = function(io,Carrera){
+module.exports = function(io,Carrera,Grupo){
     var mongoose = require('../../app/models/dbConnection');
     //Se importa el modelo
     var Alumno = require('../../app/models/Alumno');
@@ -24,22 +24,25 @@ module.exports = function(io,Carrera){
             ApellidoP:req.body.ApellidoP,
             ApellidoM:req.body.ApellidoM,
             FechaNac:req.body.FechaNac,
-            _carrera: req.body.Carrera_ID
+            _carrera: req.body._carrera
         });
+        console.log(nuevaAlumno);
         // save the Alumno and check for errors
         nuevaAlumno.save(function(err) {
-            if (err){res.send(err);}
+            if (err){console.log('error guardar alumno');res.send(err);}
             else
                 //Si el nuevo alumno es reogistrado, se relaciona con su carrera
                 Carrera.findById(nuevaAlumno._carrera,
                 function(err,carrera){
-                    if (err){res.send(err);}
+                    if (err){console.log('error buscar carrera');res.send(err);}
                     else{
                         //Se hace la relacion alumno-carrera
                         carrera._alumnos.push(nuevaAlumno);
                         carrera.save(function(err){
-                            if(err){res.send(err);}
+                            if(err){console.log('error guardar cambios carrera');res.send(err);}
                             else{
+                                console.log('alumno guardado');
+                                nuevaAlumno._carrera = carrera;
                                 io.sockets.emit('AlumnoCreado',nuevaAlumno);
                                 res.json(nuevaAlumno);
                             }
@@ -123,7 +126,7 @@ module.exports = function(io,Carrera){
     router.route('/Alumno/:id')
     .get(function(req, res) {
         var id = req.params.id;
-        console.log("id: "+id);
+        console.log("Get alumno by id: "+id);
         //Listado de todas las Alumnos
         Alumno.findOne({_id:id})
         .populate("_carrera")

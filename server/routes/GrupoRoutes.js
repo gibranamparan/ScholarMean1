@@ -57,5 +57,5 @@ module.exports = function(io){
     });
 
 
-	return router;
+    return {router:router,model:Grupo};
 };

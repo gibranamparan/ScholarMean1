@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import {Http} from '@angular/http'
+import { GlobalParamsService } from '../global-params.service';
+//import { Carrera } from '../carrera/carrera';
 import 'rxjs/add/operator/map'
 
 @Injectable()
 export class CarreraService{
-	constructor(private _http:Http) {}
-
-	private domain='http://localhost:8000/api/carrera/'
+	constructor(private _http:Http,
+		private _globalParams:GlobalParamsService) {}
+	
+	private apiURL = '/api/carrera/';
+	private domain=this._globalParams.domain+this.apiURL;
 
 	getCarreras(){
 		return this._http.get(this.domain)

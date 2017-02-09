@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { CarreraModule } from './carrera/carrera.module';
 import { GrupoModule } from './grupo/grupo.module';
 import { AlumnoModule } from './alumno/alumno.module';
-
+import { GlobalParamsService } from './global-params.service';
 const routes: Routes = [];
 
 @NgModule({
@@ -23,7 +23,7 @@ const routes: Routes = [];
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [GlobalParamsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

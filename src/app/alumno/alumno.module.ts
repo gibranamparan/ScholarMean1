@@ -6,14 +6,16 @@ import { AlumnoCreateComponent } from './alumno-create/alumno-create.component';
 import { SimpleNotificationsModule, NotificationsService} from 'angular2-notifications';
 import { AlumnoService } from './alumno.service';
 import { FormsModule } from '@angular/forms';
+import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { CarreraService } from '../carrera/carrera-service.service';
 
 @NgModule({
   imports: [
-    CommonModule,
     AlumnoRoutingModule,
+    CommonModule,
+    FormsModule,
+    Ng2TableModule,
     SimpleNotificationsModule,
-    FormsModule
   ],
   declarations: [AlumnoComponent, AlumnoCreateComponent],
   providers: [AlumnoService, CarreraService]
