@@ -7,7 +7,8 @@
 			<div class="form-group col-md-6">
 				<label for="">Nombre</label>
 				<input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Nombre"
-				[(ngModel)]='nuevoAlumno.Nombre' #Nombre='ngModel' >
+				[(ngModel)]='nuevoAlumno.Nombre' #Nombre='ngModel'
+				[value]='dateObj | date'>
 			</div>
 			<div class="form-group col-md-6">
 				<label for="">Apellido Paterno</label>
@@ -22,18 +23,21 @@
 			<div class="form-group col-md-6">
 				<label for="">FechaNac</label>
 				<input type="date" class="form-control" id="FechaNac" name="FechaNac" placeholder="Fecha de Nacimiento"
-				[(ngModel)]='nuevoAlumno.FechaNac' #FechaNac='ngModel' >
+				[value]="nuevoAlumno.FechaNac | date:'yyyy-MM-dd'" >
 			</div>
 			<div class="form-group col-md-6">
 				<label for="">Carrera</label>
-				<select name="Carrera_ID" id="Carrera" class="form-control" required="required"
-				[(ngModel)]='nuevoAlumno._carrera' #_carrera='ngModel'>
-					<option *ngFor='let carrera of Carreras' [value]='carrera._id'>{{carrera.nombre}}</option>
+				<select name="Carrera_ID" id="Carrera" class="form-control" required="required" 
+				[(ngModel)]='carreraID'>
+					<option *ngFor='let carrera of Carreras'
+					[selected]='carrera._id == carreraID'>
+						{{carrera.nombre}}
+					</option>
 				</select>
 			</div>
 			<div class="col-md-12">
 				<button type="submit" class="btn btn-primary">Guardar</button><br>
-				<span>{{testJson}}</span>
+				<span>{{testJson}}</span><br>
 			</div>
 		</form>
 	</div>

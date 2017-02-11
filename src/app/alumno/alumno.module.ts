@@ -15,7 +15,7 @@ import { CarreraService } from '../carrera/carrera-service.service';
     CommonModule,
     FormsModule,
     Ng2TableModule,
-    SimpleNotificationsModule,
+    SimpleNotificationsModule
   ],
   declarations: [AlumnoComponent, AlumnoCreateComponent],
   providers: [AlumnoService, CarreraService]

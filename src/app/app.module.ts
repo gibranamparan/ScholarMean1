@@ -2,13 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
+
 import { CarreraModule } from './carrera/carrera.module';
 import { GrupoModule } from './grupo/grupo.module';
 import { AlumnoModule } from './alumno/alumno.module';
+
+import { AppComponent } from './app.component';
 import { GlobalParamsService } from './global-params.service';
-const routes: Routes = [];
+
+const routes: Routes = [
+  { path:'appRoot', component:AppComponent }
+];
 
 @NgModule({
   declarations: [
