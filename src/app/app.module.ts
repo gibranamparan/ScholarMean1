@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import {SelectModule} from 'angular2-select';
+
 import { Routes, RouterModule } from '@angular/router';
 
 import { CarreraModule } from './carrera/carrera.module';
@@ -27,7 +29,8 @@ const routes: Routes = [
     FormsModule,
     GrupoModule,
     HttpModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    SelectModule
   ],
   providers: [GlobalParamsService],
   bootstrap: [AppComponent]

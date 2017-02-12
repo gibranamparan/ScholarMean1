@@ -1,10 +1,14 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Carrera } from './carrera';
 import { CarreraService } from './carrera-service.service';
-//Importanciones para hacer funcionar modal.
 import { SimpleNotificationsComponent, NotificationsService } from 'angular2-notifications';
+
+//Importanciones para hacer funcionar modal.
+import { ViewContainerRef } from '@angular/core';
 import { Overlay, OverlayRenderer } from 'angular2-modal';
 import { Modal } from 'angular2-modal/plugins/bootstrap';
+
+//Importacion de parametros globales
 import { GlobalParamsService } from '../global-params.service';
 
 @Component({
@@ -19,7 +23,7 @@ export class CarreraComponent implements OnInit {
       overlay.defaultViewContainer = vcRef;
   }
 
-  public carreras:Carrera[];
+  carreras:Carrera[];
   public carreraSelected:Carrera;
   public accionForm='Agregar';
   public notifOptions = this._globalParams.notificationOptions;
@@ -29,7 +33,6 @@ export class CarreraComponent implements OnInit {
 
   ngOnInit(){
   	this.showCarreras();
-
     //Evento de deteccion de registro creado
     this.socket.on('carreraCreada', function(data){
       this.carreras.push(data);
@@ -48,31 +51,27 @@ export class CarreraComponent implements OnInit {
       this.showCarreras();
       this._notificationsService.info("Editado","Registro de carrera");
     }.bind(this));
-
-    
   }
 
   showCarreras(){
   	this._carreraService.getCarreras()
   	.subscribe(
-  		(data:Carrera[])=>{ this.carreras = data; },
+  		(data:Carrera[])=>{
+        this.carreras = data;
+        this.sortCarreras();
+      },
   		error=>alert(error),
   		()=>console.log('done!')
   	);
   }
 
+  sortCarreras(){
+    this.carreras = this._carreraService
+      .sortList_nombre_asc(this.carreras)
+  }
   //Abre modal para confirmacion de eliminacion de registro
   confirmBorrarCarrera(id){
-    this.modal.confirm()
-    .size('sm')
-    .isBlocking(true)
-    .showClose(true)
-    .keyboard(27)
-    .title('Borrar')
-    .body('¿Seguro que deseas borrar este registro?')
-    .okBtn('SI')
-    .okBtnClass('btn btn-danger')
-    .cancelBtn('Cancelar')
+    this._globalParams.configConfirmationModal(this.modal)
     .open().then((resultPromise)=>{
       resultPromise.result.then(
           (result)=>{
@@ -102,5 +101,4 @@ export class CarreraComponent implements OnInit {
     this.accionForm=accion;
     this.carreraSelected = null;
   }
-  
 }

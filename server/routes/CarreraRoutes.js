@@ -114,7 +114,7 @@ module.exports = function(io){
         console.log("id: "+id);
         //Listado de todas las carreras
         Carrera.findOne({_id:id})
-        .populate("_alumnos")
+        .populate("_grupos")
         .exec(function(err,carreras) {
             if (err){
                 console.log('Error');

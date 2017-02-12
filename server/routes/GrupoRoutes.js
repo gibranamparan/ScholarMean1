@@ -13,10 +13,10 @@ module.exports = function(io){
 	});
 
     // POST /api/grupo
-	/*
-	* Registra un nuevo objeto de esta entidad
-	*/
-    router.route('/grupo')
+    /*
+    * Registra un nuevo objeto de esta entidad
+    */
+    router.route('/Grupo')
     .post(function(req, res) {
         // create a new instance of the carrera model
         var nuevoGrupo = new Grupo({
@@ -36,11 +36,11 @@ module.exports = function(io){
         });
     });
 
-	// GET /api/grupo
-	/*
-	* Entrega un listado completo de todos los registros
-	*/
-    router.route('/grupo')
+    // GET /api/grupo
+    /*
+    * Entrega un listado completo de todos los registros
+    */
+    router.route('/Grupo')
     .get(function(req, res) {
 
         //Listado de todas las carreras
@@ -56,6 +56,43 @@ module.exports = function(io){
         
     });
 
+    // GET /api/grupo/:id
+    /*
+    * Entrega un listado completo de todos los registros
+    */
+    router.route('/Grupo/:id')
+    .get(function(req, res) {
+        var id = req.params.id;
+        //Listado de todas las carreras
+        Grupo.findById(id).populate('_alumnos').exec(function(err,grupo) {
+            if (err){
+                console.log('Error');
+                res.send(err);
+            }else{
+                console.log('DONE!');
+                res.json(grupo);
+            }
+        });
+        
+    });
 
+    // DELETE /api/grupo/:id
+    /*
+    * Entrega un listado completo de todos los registros
+    */
+    router.route('/Grupo/:id')
+    .delete(function(req, res) {
+        var id = req.params.id;
+        //Listado de todas las carreras
+        Grupo.findById(id)
+        .remove(function(err,data) {
+            if (err){console.log('Error');res.send(err);}
+            else{
+                console.log('DONE!');
+                res.json(data);
+            }
+        });
+        
+    });
     return {router:router,model:Grupo};
 };

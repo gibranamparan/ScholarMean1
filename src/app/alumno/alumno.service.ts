@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import {Http} from '@angular/http'
 import 'rxjs/add/operator/map'
 import { GlobalParamsService } from '../global-params.service';
+import { Alumno } from './Alumno';
+
+export enum AlumnoStatus{
+	EnRegistro=1, Preinscrito, Inscrito	
+}
 
 @Injectable()
 export class AlumnoService {
@@ -12,8 +17,9 @@ export class AlumnoService {
 	private apiURL = '/api/Alumno/';
 	private domain=this._globalParams.domain+this.apiURL;
 
-	getAlumnos(){
-		return this._http.get(this.domain)
+	getAlumnos(soloPreinscritos){
+		return this._http.get(this.domain+
+			(soloPreinscritos?'soloPreinscritos/':''))
 		.map(res=>res.json())
 	}
 
@@ -35,6 +41,24 @@ export class AlumnoService {
 	updateAlumno(Alumno){
 		return this._http.put(this.domain,Alumno)
 		.map(res=>res.json())
+	}
+
+	registrarAlumno(id){
+		return this._http.get(this.domain+'registrarAlumno/'+id)
+		.map(res=>res.json())
+	}
+	
+	sortList_createdAt_asc(AlumnosList:Alumno[]){
+		AlumnosList = AlumnosList.sort(
+			(a:Alumno,b:Alumno)=>{
+				if(a.createdAt<b.createdAt)
+					return 1;
+				if(a.createdAt>b.createdAt)
+					return -1;
+				return 0;
+			}
+		);
+		return AlumnosList;
 	}
 
 }

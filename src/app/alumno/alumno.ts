@@ -1,4 +1,5 @@
 import { Carrera } from '../carrera/carrera';
+import { Grupo } from '../grupo/grupo';
 
 export class Alumno{
  	Apellido:string;
@@ -9,6 +10,7 @@ export class Alumno{
 		public ApellidoM?:string,
 		public FechaNac?:string,
 		public _carrera?:Carrera,
+		public _grupo?:Grupo,
 		public createdAt?:Date
 	){ }
 }

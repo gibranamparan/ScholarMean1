@@ -23,20 +23,28 @@
 			<div class="form-group col-md-6">
 				<label for="">FechaNac</label>
 				<input type="date" class="form-control" id="FechaNac" name="FechaNac" placeholder="Fecha de Nacimiento"
-				[value]="nuevoAlumno.FechaNac | date:'yyyy-MM-dd'" >
+				[(ngModel)]='nuevoAlumno.FechaNac'
+				[value]="nuevoAlumno.FechaNac" >
 			</div>
 			<div class="form-group col-md-6">
-				<label for="">Carrera</label>
-				<select name="Carrera_ID" id="Carrera" class="form-control" required="required" 
-				[(ngModel)]='carreraID'>
-					<option *ngFor='let carrera of Carreras'
-					[selected]='carrera._id == carreraID'>
-						{{carrera.nombre}}
-					</option>
-				</select>
+				<label for="carrera">Carrera</label>
+				<select class="form-control" id="carrera" name="carrera"
+				[(ngModel)]='nuevoAlumno._carrera' required>
+				    <option *ngFor="let carrera of Carreras"
+				    [value]="carrera._id">
+				    	{{carrera.nombre}}
+				    </option>
+				  </select>
 			</div>
 			<div class="col-md-12">
-				<button type="submit" class="btn btn-primary">Guardar</button><br>
+				<button type="submit" class="btn btn-primary">
+					Guardar
+				</button>
+				<button type="button" class="btn btn-success"
+				(click)='confirmarInscripcion()'
+				*ngIf='showInscribirButton()'>
+					Inscribir
+				</button>
 				<span>{{testJson}}</span><br>
 			</div>
 		</form>

@@ -20,8 +20,11 @@
 					<td>{{alumno.ApellidoP+' '+alumno.ApellidoM}}</td>
 					<td>{{alumno._carrera.abreviacion}}</td>
 					<td>
-						<button type="button" class="btn btn-success">Inscribir</button> |
-						<a href="{{'createAlumno/'+alumno._id}}">Editar</a>
+						<a href="{{'createAlumno/'+alumno._id}}">
+							<i class="glyphicon glyphicon-ok"></i>
+						</a> | 
+						<i class="glyphicon glyphicon-remove"
+						(click)='confirmBorrarPreinscrito(alumno._id)'></i>
 					</td>
 				</tr>
 			</tbody>

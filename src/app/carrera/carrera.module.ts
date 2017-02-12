@@ -8,6 +8,8 @@ import { CarreraCreateComponent } from './carrera-create/carrera-create.componen
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'angular2-modal';
 import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+import { CarreraDetailsComponent } from './carrera-details/carrera-details.component';
+import { SimpleListComponent } from '../grupo/simple-list/simple-list.component';
 
 @NgModule({
   imports: [
@@ -18,7 +20,9 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
     FormsModule,
     ModalModule.forRoot(),
   ],
-  declarations: [CarreraComponent, CarreraCreateComponent],
+  declarations: [
+    CarreraComponent, CarreraCreateComponent, CarreraDetailsComponent,
+    SimpleListComponent],
   providers: [CarreraService, NotificationsService],
 })
 export class CarreraModule { }

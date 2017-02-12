@@ -23,6 +23,7 @@ var io 		= require('socket.io').listen(server); //Websocket init
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
   next();
 });
 
@@ -30,9 +31,9 @@ var carreraRouterDB = require('./server/routes/CarreraRoutes')(io);
 var routerCarrera = carreraRouterDB.router; //Se toma la ruta
 var CarreraModel = carreraRouterDB.model; //Se toma el modelo
 
-var routerGrupo = require('./server/routes/GrupoRoutes')(io);
-var routerGrupo = routerGrupo.router; //Se toma la ruta
-var GrupoModel = routerGrupo.model; //Se toma el modelo
+var grupoRouterDB = require('./server/routes/GrupoRoutes')(io);
+var routerGrupo = grupoRouterDB.router; //Se toma la ruta
+var GrupoModel = grupoRouterDB.model; //Se toma el modelo
 
 //Las rutas de alumno ocupan del modelo de carrera
 var routerAlumno = require('./server/routes/AlumnoRoutes')(io,CarreraModel,GrupoModel);

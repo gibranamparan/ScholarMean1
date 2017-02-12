@@ -19,10 +19,11 @@
 		<td>{{carrera.nombre}}</td>
 		<td>{{carrera.abreviacion}}</td>
 		<td>
-			<i class="glyphicon glyphicon-trash"
-			(click)='confirmBorrarCarrera(carrera._id)'></i>
+			<i class="glyphicon glyphicon-remove"
+			(click)='confirmBorrarCarrera(carrera._id)'></i> | 
 			<i class="glyphicon glyphicon-edit"
-			(click)='confirmEditarCarrera(carrera)'></i>
+			(click)='confirmEditarCarrera(carrera)'></i> | 
+			<a href="{{'carreraDetails/'+carrera._id}}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>Details</a> |
 		</td>
 	</tr>
 </table>

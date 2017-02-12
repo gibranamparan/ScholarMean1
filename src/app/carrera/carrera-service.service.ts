@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Http} from '@angular/http'
+import { Http } from '@angular/http'
 import { GlobalParamsService } from '../global-params.service';
-//import { Carrera } from '../carrera/carrera';
+import { Carrera } from './carrera';
 import 'rxjs/add/operator/map'
 
 @Injectable()
@@ -14,6 +14,11 @@ export class CarreraService{
 
 	getCarreras(){
 		return this._http.get(this.domain)
+		.map(res=>res.json())
+	}
+
+	getCarrera(id){
+		return this._http.get(this.domain+id)
 		.map(res=>res.json())
 	}
 
@@ -30,5 +35,18 @@ export class CarreraService{
 	updateCarrera(carrera){
 		return this._http.put(this.domain,carrera)
 		.map(res=>res.json())
+	}
+
+	sortList_nombre_asc(CarrerasList:Carrera[]){
+		CarrerasList = CarrerasList.sort(
+			(a:Carrera,b:Carrera)=>{
+				if(a.nombre<b.nombre)
+					return -1;
+				if(a.nombre>b.nombre)
+					return 1;
+				return 0;
+			}
+		);
+		return CarrerasList;
 	}
 }

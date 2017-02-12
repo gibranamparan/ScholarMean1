@@ -7,6 +7,7 @@ var AlumnoSchema   = new Schema({
 	ApellidoM : String,
 	FechaNac : Date,
 	_carrera : { type: String, ref: 'Carrera' },
+	_grupo :  { type: String, ref: 'Grupo' },
 },
 {
   timestamps: true
