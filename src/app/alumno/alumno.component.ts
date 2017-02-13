@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlumnoService } from './alumno.service';
 import { SimpleNotificationsComponent, NotificationsService } from 'angular2-notifications';
-import * as io from 'socket.io-client';
 
 //Importanciones para hacer funcionar modal.
 import { ViewContainerRef } from '@angular/core';
@@ -34,8 +33,8 @@ export class AlumnoComponent implements OnInit {
 	public notifOptions = this._globalParams.notificationOptions;
 
 	//Se inicializan servicios de websockets
-	//io = require("socket.io-client");
-	socket = io(this._globalParams.domain);
+	io = require("socket.io-client");
+	socket = this.io(this._globalParams.domain);
 
 	ngOnInit() {
 		this.showAlumnos();
