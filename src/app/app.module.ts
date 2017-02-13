@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import {SelectModule} from 'angular2-select';
+import { SelectModule } from 'angular2-select';
 
 import { Routes, RouterModule } from '@angular/router';
 

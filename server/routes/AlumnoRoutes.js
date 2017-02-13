@@ -3,7 +3,7 @@ module.exports = function(io,Carrera,Grupo){
     var mongoose = require('../../app/models/dbConnection');
     
     //Se importa el modelo
-    var Alumno = require('../../app/models/Alumno');
+    var Alumno = require('../../app/models/alumno');
 
     var router = require('express').Router();
     
