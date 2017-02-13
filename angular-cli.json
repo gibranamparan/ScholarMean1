@@ -19,11 +19,11 @@
       "mobile": false,
       "styles": [
         "styles.css",
-        "../bower_components/bootstrap/dist/css/bootstrap.min.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
-        "../bower_components/bootstrap/dist/js/bootstrap.min.js"
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",
