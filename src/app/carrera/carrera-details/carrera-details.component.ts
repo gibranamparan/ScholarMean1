@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { CarreraService } from '../carrera-service.service';
 import { Carrera } from '../carrera';
+import { Grupo } from '../../grupo/grupo';
 
 @Component({
   selector: 'app-carrera-details',
@@ -11,6 +12,9 @@ import { Carrera } from '../carrera';
 export class CarreraDetailsComponent implements OnInit {
 	carreraID:string;
 	carrera:Carrera = new Carrera();
+  grupoID1:string;
+  grupoID2:string;
+
   constructor(private _activatedRoute: ActivatedRoute,
   	private _carreraService : CarreraService) {
   	// Toma el ID del registro en la URL
@@ -23,7 +27,9 @@ export class CarreraDetailsComponent implements OnInit {
   	.subscribe(
   		(data:Carrera)=>{
         this.carrera = data;
-        console.log(this.carrera)
+        this.grupoID1 = this.carrera._grupos[0]._id;
+        console.log('Carrera: '+JSON.stringify(this.carrera))
+        console.log('grupoID1: '+JSON.stringify(this.grupoID1))
       },
   		error=>alert(error),
   		()=>console.log('done!')

@@ -4,6 +4,7 @@ import { AlumnoService, AlumnoStatus } from '../../alumno/alumno.service';
 import { GrupoService } from '../../grupo/grupo.service';
 import { Carrera } from '../../carrera/carrera';
 import { Alumno } from '../../alumno/alumno';
+import { Grupo } from '../../grupo/grupo';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {Subscriber} from 'rxjs';
@@ -26,7 +27,8 @@ export class AlumnoCreateComponent implements OnInit {
 		private _alumnoService:AlumnoService,
 		private _grupoService:GrupoService,
 		private _router:Router,
-		private _activatedRoute: ActivatedRoute, private ref:ChangeDetectorRef) {
+		private _activatedRoute: ActivatedRoute,
+		private ref:ChangeDetectorRef) {
 			// Toma el ID del registro en la URL
 		    this._activatedRoute.params
 		    .subscribe((params: Params) => {
@@ -39,8 +41,9 @@ export class AlumnoCreateComponent implements OnInit {
 		        .subscribe(
 		        	(data:Alumno)=>{
 						this.nuevoAlumno = data;
-						this.nuevoAlumno.FechaNac = moment(this.nuevoAlumno.FechaNac).
-							format('YYYY-MM-DD');
+						this.nuevoAlumno.FechaNac = 
+							moment(this.nuevoAlumno.FechaNac)
+							.format('YYYY-MM-DD');
 						console.log(this.nuevoAlumno.FechaNac);
 		        	},
 					error=>alert(error),
@@ -103,8 +106,14 @@ export class AlumnoCreateComponent implements OnInit {
 
 	confirmarInscripcion(){
 		this.modificarAlumno();
-		this._alumnoService.registrarAlumno(this.nuevoAlumno._id);
-		this._router.navigate(['alumno']);
+		this._alumnoService.registrarAlumno(this.nuevoAlumno._id)
+		.subscribe(
+			(data:Grupo)=>{
+				this._router.navigate(['carreraDetails',data._carrera]);
+			},
+			error=>alert(error),
+			()=>console.log('done!')
+		);
 	}
 
 	determinarStatusAlumno(){

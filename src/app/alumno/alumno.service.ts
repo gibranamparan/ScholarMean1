@@ -15,7 +15,7 @@ export class AlumnoService {
 		private _globalParams:GlobalParamsService) {}
 
 	private apiURL = '/api/Alumno/';
-	private domain=this._globalParams.domain+this.apiURL;
+	private domain = this._globalParams.domain+this.apiURL;
 
 	getAlumnos(soloPreinscritos){
 		return this._http.get(this.domain+

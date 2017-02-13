@@ -74,6 +74,7 @@ export class AlumnoComponent implements OnInit {
 		.subscribe(
 			(data:Alumno[])=>{
 				this.Alumnos = data;
+				console.log(this.Alumnos);
 				this.sortAlumnosByDate();
 			},
 			(error)=>{console.log(error)}
@@ -83,7 +84,7 @@ export class AlumnoComponent implements OnInit {
 	//Metodo para organizar registros por fecha de creacion
 	sortAlumnosByDate(){
 		this.Alumnos = this._alumnoService.
-		sortList_createdAt_asc(this.Alumnos);
+			sortList_createdAt_asc(this.Alumnos);
 	}
 
 	confirmBorrarPreinscrito(id){

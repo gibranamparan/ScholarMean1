@@ -34,9 +34,15 @@ var CarreraModel = carreraRouterDB.model; //Se toma el modelo
 var grupoRouterDB = require('./server/routes/GrupoRoutes')(io);
 var routerGrupo = grupoRouterDB.router; //Se toma la ruta
 var GrupoModel = grupoRouterDB.model; //Se toma el modelo
-
 //Las rutas de alumno ocupan del modelo de carrera
 var routerAlumno = require('./server/routes/AlumnoRoutes')(io,CarreraModel,GrupoModel);
+
+// middleware to use for all requests before executing
+app.use(function(req, res, next) {
+    // do logging
+    //console.log('Something is happening.');
+    next(); // make sure we go to the next routes and don't stop here
+});
 
 //Se asocian las rutas de las entidades a cada 
 app.use('/api', routerCarrera);
