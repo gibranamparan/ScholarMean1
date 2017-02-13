@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http} from '@angular/http'
 import 'rxjs/add/operator/map'
 import { GlobalParamsService } from '../global-params.service';
-import { Alumno } from './Alumno';
+import { Alumno } from './alumno';
 
 export enum AlumnoStatus{
 	EnRegistro=1, Preinscrito, Inscrito	
