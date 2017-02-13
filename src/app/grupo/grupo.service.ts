@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import {Http} from '@angular/http'
 import 'rxjs/add/operator/map'
+import { GlobalParamsService } from '../global-params.service';
 
 @Injectable()
 export class GrupoService{
-	constructor(private _http:Http) {}
+	constructor(private _http:Http,
+		private _globalParams:GlobalParamsService) {}
 
-	private domain='http://localhost:8000/api/grupo/'
+	private apiURL = '/api/grupo/';
+	private domain=this._globalParams.domain+this.apiURL;
 
 	getGrupos(){
 		return this._http.get(this.domain)

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Grupo } from './grupo';
 import { GrupoService } from './grupo.service';
 import { SimpleNotificationsComponent, NotificationsService } from 'angular2-notifications';
+import { GlobalParamsService } from '../global-params.service';
 
 @Component({
   selector: 'app-grupo',
@@ -10,7 +11,8 @@ import { SimpleNotificationsComponent, NotificationsService } from 'angular2-not
 })
 export class GrupoComponent implements OnInit {
   constructor(private _grupoService : GrupoService,
-    private _notificationsService : NotificationsService){}
+    private _notificationsService : NotificationsService,
+    private _globalParams:GlobalParamsService){}
 
   public grupos:Grupo[];
   public notifOptions = { //Opciones de notificacion
@@ -18,7 +20,7 @@ export class GrupoComponent implements OnInit {
     lastOnBottom: true
   }
   io = require("socket.io-client");
-  socket = this.io('http://localhost:8000');
+  socket = this.io(this._globalParams.domain);
 
   ngOnInit() {
   	this.showCarreras();
