@@ -41,7 +41,8 @@ export class AlumnoComponent implements OnInit {
 
 	    //Evento de deteccion de registro creado
 	    this.socket.on('AlumnoCreado', function(data){
-	      this.Alumnos.push(data);
+	      //this.Alumnos.push(data);
+	      this.showAlumnos();
 	      this.sortAlumnosByDate();
 	      let carrera = data._carrera.abreviacion;
 	      this._notificationsService.info("Nuevo",
