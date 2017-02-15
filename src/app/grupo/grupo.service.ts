@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {Http} from '@angular/http'
 import 'rxjs/add/operator/map'
 import { GlobalParamsService } from '../global-params.service';
+import { Grupo } from './grupo';
+
 
 @Injectable()
 export class GrupoService{
@@ -18,6 +20,11 @@ export class GrupoService{
 
 	getGrupo(id){
 		return this._http.get(this.domain+id)
+		.map(res=>res.json())
+	}
+
+	addGrupo(carreraID){
+		return this._http.post(this.domain,new Grupo('','',[],carreraID))
 		.map(res=>res.json())
 	}
 

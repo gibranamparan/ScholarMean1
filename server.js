@@ -32,7 +32,7 @@ var carreraRouterDB = require('./server/routes/CarreraRoutes')(io);
 var routerCarrera = carreraRouterDB.router; //Se toma la ruta
 var CarreraModel = carreraRouterDB.model; //Se toma el modelo
 
-var grupoRouterDB = require('./server/routes/GrupoRoutes')(io);
+var grupoRouterDB = require('./server/routes/GrupoRoutes')(io,CarreraModel);
 var routerGrupo = grupoRouterDB.router; //Se toma la ruta
 var GrupoModel = grupoRouterDB.model; //Se toma el modelo
 //Las rutas de alumno ocupan del modelo de carrera

@@ -1,4 +1,5 @@
-module.exports = function(io){
+var chalk = require('chalk');
+module.exports = function(io,Carrera){
 	var mongoose = require('../../app/models/dbConnection');
 
 	//Se importa el modelo
@@ -18,20 +19,33 @@ module.exports = function(io){
     */
     router.route('/Grupo')
     .post(function(req, res) {
-        // create a new instance of the carrera model
-        var nuevoGrupo = new Grupo({
-            nombre:req.body.nombre,
-        });
-        
-        // save the Carrera and check for errors
-        nuevoGrupo.save(function(err) {
-            if (err){
-                console.log('Error');
-                res.send(err);
-            }else{
-                console.log('DONE!');
-                io.sockets.emit('grupoCreado',nuevoGrupo);
-                res.json(nuevoGrupo);
+        var carreraID = req.body._carrera;
+        Carrera.findById(carreraID,function(err,carrera){
+            if (err){console.log(chalk.red('Error: '+err));res.send(err); }
+            else{
+                var cantidadGrupos = carrera._grupos.length;
+                //Se crea nuevo grupo
+                var nuevoGrupo = new Grupo({
+                    //Se define nombre de nuevo grupo, ej. TIC1-1, TIC2-1
+                    nombre:carrera.abreviacion+(cantidadGrupos+1)+'-1',
+                    _carrera:req.body._carrera,
+                });
+                
+                // save the Carrera and check for errors
+                nuevoGrupo.save(function(err) {
+                    if (err){console.log(chalk.red('Error: '+err));res.send(err); }
+                    else{
+                        console.log('DONE!');
+                        io.sockets.emit('grupoCreado',nuevoGrupo);
+
+                        carrera._grupos.push(nuevoGrupo._id);
+                        carrera.save(function(err){
+                            if (err){console.log(chalk.red('Error: '+err));res.send(err); }
+                        });
+
+                        res.json(nuevoGrupo);
+                    }
+                });
             }
         });
     });

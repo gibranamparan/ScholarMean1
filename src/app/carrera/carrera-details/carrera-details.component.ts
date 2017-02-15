@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { CarreraService } from '../carrera-service.service';
+import { GrupoService } from '../../grupo/grupo.service';
 import { Carrera } from '../carrera';
 import { Grupo } from '../../grupo/grupo';
 
@@ -16,7 +17,8 @@ export class CarreraDetailsComponent implements OnInit {
   grupoID2:string;
 
   constructor(private _activatedRoute: ActivatedRoute,
-  	private _carreraService : CarreraService) {
+    private _carreraService : CarreraService,
+    private _grupoService : GrupoService) {
   	// Toma el ID del registro en la URL
     this._activatedRoute.params
     .subscribe((params: Params) => {
@@ -28,6 +30,9 @@ export class CarreraDetailsComponent implements OnInit {
   		(data:Carrera)=>{
         this.carrera = data;
         this.grupoID1 = this.carrera._grupos[0]._id;
+        if(this.carrera._grupos.length>1){
+          this.grupoID2 = this.carrera._grupos[2]._id;
+        }
         console.log('Carrera: '+JSON.stringify(this.carrera))
         console.log('grupoID1: '+JSON.stringify(this.grupoID1))
       },
@@ -37,6 +42,16 @@ export class CarreraDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  crearNuevoGrupo(){
+    this._grupoService.addGrupo(this.carreraID)
+    .subscribe(
+        (data:Grupo)=>{
+          this.grupoID2 = data._id;
+        },
+        ()=>{}
+      )
   }
 
 }

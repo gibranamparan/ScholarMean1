@@ -2,5 +2,14 @@
 	{{carrera.nombre}}
 </h1>
 
-<grupo-simple-list *ngIf='grupoID1' [grupoID]='grupoID1' class='col-md-6'>
-</grupo-simple-list>
+<div class="row">
+	<button type="button" class="btn btn-primary" (click)='crearNuevoGrupo()'>Nuevo Grupo</button>
+</div>
+
+<div class="row">
+	<grupo-simple-list *ngIf='grupoID1' [grupoID]='grupoID1' class='col-md-6'>
+	</grupo-simple-list>
+
+	<grupo-simple-list *ngIf='grupoID2' [grupoID]='grupoID2' class='col-md-6'>
+	</grupo-simple-list>
+</div>
