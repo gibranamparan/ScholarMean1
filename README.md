@@ -1,6 +1,13 @@
 # ScholarMean1
-You can see and use the implemented application in this webiste: [Heroku App](https://scholarnode.herokuapp.com/)
+Puede ver y utilizar el proyecto en modo de prototipo incremental directamente ingresando a este enlace: [Heroku App](https://scholarnode.herokuapp.com/)
 
+## Development Log
+###v0.0.1:
+Modulo de estudiantes: Alta y consulta de preinscripciones, aprobación de preinscripcion con registro y generación automatica de nuevo grupo.
+Modulo de carreras: Consulta de detalles de carrera donde se administran los estudiantes inscritos a cada grupo.
+Comunicación Asincrona Constante: Integración de websockets implementando SocketIO en browser y server
+
+##Tools Used
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.25.5.
 
 ## Development server
