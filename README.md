@@ -1,4 +1,5 @@
 # ScholarMean1
+You can see and use the implemented application in this webiste: [Heroku App](https://scholarnode.herokuapp.com/)
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.25.5.
 
