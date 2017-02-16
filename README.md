@@ -1,4 +1,5 @@
 # ScholarMean1
+Desarrollado en la Universidad Tecnológica de Puerto Peñasco [UTPP](http://utpp.edu.mx/) por el PTC M.C. Rafael Gibrán Amparán Durán y estudiantes.
 Puede ver y utilizar el proyecto en modo de prototipo incremental directamente ingresando a este enlace: [Heroku App](https://scholarnode.herokuapp.com/)
 
 ## Development Log
