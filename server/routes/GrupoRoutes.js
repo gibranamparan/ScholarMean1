@@ -108,5 +108,32 @@ module.exports = function(io,Carrera){
         });
         
     });
+
+    // POST /api/grupo/registrarAlumnos/:grupoID
+    /*
+    * Entrega un listado completo de todos los registros
+    */
+    router.route('/Grupo/registrarAlumnos/:grupoID')
+    .post(function(req, res) {
+        var grupoID = req.params.grupoID;
+        var alumnos = req.body.alumnos;
+        var alumnosIDs = new Array();
+        alumnos.forEach(function(alumno){
+            alumnosIDs.push(alumno._id);
+        });
+        //Listado de todas las carreras
+        Grupo.findById(grupoID,function(err,grupo) {
+            if (err){console.log(chalk.red('Error: '+err));res.send(err);}
+            else{
+                grupo._alumnos = alumnosIDs;
+                grupo.save(function(err){
+                    if (err){console.log(chalk.red('Error: '+err));res.send(err);}
+                    //DISEÑAR EMIT DE CAMBIOS SALVADOS
+                    res.json(grupo);
+                });
+            }
+        });
+        
+    });
     return {router:router,model:Grupo};
 };

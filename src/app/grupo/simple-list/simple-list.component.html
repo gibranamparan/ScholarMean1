@@ -1,16 +1,19 @@
-<h2>{{grupo.nombre}}</h2>
-<table class="table table-hover table-">
+<h3><strong>Grupo: </strong>{{grupo.nombre}}</h3>
+<table class="table table-hover table-striped">
 	<thead>
 		<tr>
+			<th></th>
 			<th>No. Matrícula</th>
 			<th>Nombre</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr *ngFor='let alumno of grupo._alumnos'>
+		<tr *ngFor='let alumno of vmAlumnos'
+			(click)='seleccionarAlumno(alumno._id)'
+			[class.selected]='alumno.selected'>
 			<td>XYZ</td>
 			<td>
-				{{alumno.Nombre+' '+alumno.ApellidoP+' '+alumno.ApellidoM }}
+				{{alumno.ApellidoP+' '+alumno.ApellidoM+' '+alumno.Nombre}}
 			</td>
 			<td></td>
 		</tr>

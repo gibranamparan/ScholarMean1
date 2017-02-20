@@ -115,13 +115,13 @@ module.exports = function(io){
         //Listado de todas las carreras
         Carrera.findOne({_id:id})
         .populate("_grupos")
-        .exec(function(err,carreras) {
+        .exec(function(err,carrera) {
             if (err){
                 console.log('Error');
                 res.send(err);
             }else{
                 console.log('DONE!');
-                res.json(carreras);
+                res.json(carrera);
             }
         });
         

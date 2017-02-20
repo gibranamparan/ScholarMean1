@@ -8,6 +8,7 @@ import { AlumnoService } from './alumno.service';
 import { FormsModule } from '@angular/forms';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { CarreraService } from '../carrera/carrera-service.service';
+import { AlumnoBuscadorComponent } from './alumno-buscador/alumno-buscador.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { CarreraService } from '../carrera/carrera-service.service';
     Ng2TableModule,
     SimpleNotificationsModule
   ],
-  declarations: [AlumnoComponent, AlumnoCreateComponent],
+  declarations: [AlumnoComponent, AlumnoCreateComponent, AlumnoBuscadorComponent],
   providers: [AlumnoService, CarreraService]
 })
 export class AlumnoModule { }

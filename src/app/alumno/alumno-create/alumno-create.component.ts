@@ -109,7 +109,7 @@ export class AlumnoCreateComponent implements OnInit {
 		this._alumnoService.registrarAlumno(this.nuevoAlumno._id)
 		.subscribe(
 			(data:Grupo)=>{
-				this._router.navigate(['carreraDetails',data._carrera]);
+				this._router.navigate(['alumno']);
 			},
 			error=>alert(error),
 			()=>console.log('done!')

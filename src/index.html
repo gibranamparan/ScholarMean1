@@ -9,43 +9,12 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-<div class="nav-side-menu">
-    <div class="brand"><img src="assets\img\logo1.png" id='logo' style="height:3.5em">  ScholarNode</div>
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-    <div class="menu-list">
-        <ul id="menu-content" class="menu-content collapse out">
-            <li>
-                <a href="carrera">
-                    <i class="glyphicon glyphicon-education"></i> Carreras
-                </a>
-            </li>
-            <li data-toggle="collapse" data-target="#alumnosMenu" class="collapsed active">
-                <a href="#"><i class="fa fa-users fa-lg"></i> Alumnos <span class="arrow"></span></a>
-            </li>
-	            <ul class="sub-menu collapse" id="alumnosMenu">
-	                <li class="active"><a href="#">Buscador General</a></li>
-	                <li><a href="alumno">Monitor de Preinscripciones</a></li>
-	            </ul>
-            <li data-toggle="collapse" data-target="#service" class="collapsed">
-                <a href="#"><i class="fa fa-money fa-lg"></i> Finanzas <span class="arrow"></span></a>
-            </li>
-	            <ul class="sub-menu collapse" id="service">
-	                <li><a href="">Buscador de pagos</a></li>
-	            </ul>
-            <li>
-                <a href="#">
-                    <i class="fa fa-user fa-lg"></i> Profile
-                </a>
-            </li>
-        </ul>
+
+    <sidebarmenu></sidebarmenu>
+
+    <div id="main">
+        <app-root>Loading...</app-root>
     </div>
-</div>
-<div class="container" id="main">
-    <div class="row">
-        <div class="col-md-12">
-		  <app-root>Loading...</app-root>
-        </div>
-    </div>
-</div>
+
 </body>
 </html>

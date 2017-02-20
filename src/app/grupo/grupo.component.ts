@@ -15,10 +15,8 @@ export class GrupoComponent implements OnInit {
     private _globalParams:GlobalParamsService){}
 
   public grupos:Grupo[];
-  public notifOptions = { //Opciones de notificacion
-    position: ["top", "right"], timeOut: 2000,
-    lastOnBottom: true
-  }
+  public notifOptions = this._globalParams.notificationOptions;
+
   io = require("socket.io-client");
   socket = this.io(this._globalParams.domain);
 

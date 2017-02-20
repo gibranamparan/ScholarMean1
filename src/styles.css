@@ -11,5 +11,13 @@ td i:hover{
 }
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: #BCFF80;
+  background-color: #74E2FD;
+}
+
+.selected{
+	background-color: #d19b3d !important;
+}
+
+.table-hover tbody tr.selected:hover td, .table-hover tbody tr.selected:hover th {
+	background-color: #D1BF9F !important;
 }

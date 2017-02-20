@@ -1,26 +1,32 @@
+/*NATIVOS*/
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
-import { SelectModule } from 'angular2-select';
-
 import { Routes, RouterModule } from '@angular/router';
 
+/*MODULOS*/
 import { AlumnoModule } from './alumno/alumno.module';
 import { GrupoModule } from './grupo/grupo.module';
 import { CarreraModule } from './carrera/carrera.module';
+import { PagosModule } from './pagos/pagos.module';
 
+/*COMPONENTES*/
 import { AppComponent } from './app.component';
+import { SidebarmenuComponent } from './sidebarmenu/sidebarmenu.component';
+
+/*SERVICIOS*/
 import { GlobalParamsService } from './global-params.service';
 
 const routes: Routes = [
-  { path:'appRoot', component:AppComponent }
+  { path:'appRoot', component:AppComponent },
+  { path: '',   redirectTo: 'carrera', pathMatch: 'full' },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
+    SidebarmenuComponent,
   ],
   imports: [
     AlumnoModule,
@@ -29,10 +35,10 @@ const routes: Routes = [
     FormsModule,
     GrupoModule,
     HttpModule,
-    RouterModule.forRoot(routes),
-    SelectModule
+    PagosModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [GlobalParamsService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,SidebarmenuComponent]
 })
 export class AppModule { }

@@ -32,4 +32,9 @@ export class GrupoService{
 		return this._http.post(this.domain+'registrarAlumno/',alumno)
 		.map(res=>res.json())
 	}
+
+	registrarAlumnos(id,alumnos){
+		return this._http.post(this.domain+'registrarAlumnos/'+id,{"alumnos":alumnos})
+		.map(res=>res.json())
+	}
 }

@@ -60,5 +60,18 @@ export class AlumnoService {
 		);
 		return AlumnosList;
 	}
+	
+	sortList_ApellidoP_asc(AlumnosList:Alumno[]){
+		AlumnosList = AlumnosList.sort(
+			(a:Alumno,b:Alumno)=>{
+				if(a.ApellidoP.toLowerCase()<b.ApellidoP.toLowerCase())
+					return -1;
+				if(a.ApellidoP.toLowerCase()>b.ApellidoP.toLowerCase())
+					return 1;
+				return 0;
+			}
+		);
+		return AlumnosList;
+	}
 
 }

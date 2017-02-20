@@ -2,7 +2,6 @@ import { Carrera } from '../carrera/carrera';
 import { Grupo } from '../grupo/grupo';
 
 export class Alumno{
- 	Apellido:string;
 	constructor(
 		public _id?:string,
 		public Nombre?:string,
@@ -13,4 +12,8 @@ export class Alumno{
 		public _grupo?:Grupo,
 		public createdAt?:Date
 	){ }
+
+	public get NombreCompleto(){
+		return this.ApellidoP+' '+this.ApellidoM+' '+this.Nombre;
+	}
 }

@@ -13,7 +13,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Point static path to dist
-console.log('__dirname'+__dirname);
 app.use(express.static(path.join(__dirname, 'dist')));
 
 //Instace server

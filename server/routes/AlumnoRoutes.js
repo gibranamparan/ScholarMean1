@@ -183,7 +183,8 @@ module.exports = function(io,Carrera,Grupo){
                 .exec(function(err,carrera){
                     if (err){console.log('Error');res.send(err);}
                     else{
-                        if(carrera._grupos.length===0){ //Si no habia grupos de la carrera
+                        //Si no habia grupos de la carrera
+                        if(carrera._grupos.length===0){ 
                             //Se crea uno nuevo grupo y se asocia al alumno
                             var nuevoGrupo = new Grupo({
                                 nombre:carrera.abreviacion+'1-1',
@@ -197,13 +198,13 @@ module.exports = function(io,Carrera,Grupo){
                                     res.send(err);
                                 }
                                 else{
-                                    //Asociacion carrera-grupo
+                                    //Asociacion el grupo a la carrera
                                     carrera._grupos.push(nuevoGrupo._id);
                                     carrera.save(function(err){
                                         if (err){res.send(err);}
                                         else{
-                                            //Asociar grupo a alumno
-                                            asociar_Grupo_Alumno(alumno, nuevoGrupo._id);
+                                            //Asociar el grupo al alumno
+                                            asociar_Grupo_Alumno(Alumno,alumno, nuevoGrupo._id, io);
                                             //Notificar creacion de nuevo grupo
                                             console.log(chalk.green('**grupoCreado: '+nuevoGrupo));
                                             io.sockets.emit('grupoCreado',nuevoGrupo);
@@ -212,7 +213,8 @@ module.exports = function(io,Carrera,Grupo){
                                     });
                                 }
                             });
-                        }else{ //Si la carrera ya tenia grupos registrados
+                        //Si la carrera ya tenia grupos registrados
+                        }else{
                             //Se busca el primer grupo de la carrera y se asocia el alumno
                             Grupo.findById(carrera._grupos[0]._id,function(err,grupo){
                                 grupo._alumnos.push(alumno._id);
@@ -221,7 +223,7 @@ module.exports = function(io,Carrera,Grupo){
                                     else{
                                         console.log(chalk.green('**Alumno '+alumno._id+' asociado a grupo '+grupo._id));
                                         //Asociar grupo a alumno
-                                        asociar_Grupo_Alumno(alumno, grupo._id);
+                                        asociar_Grupo_Alumno(Alumno,alumno, grupo._id, io);
                                         res.json(grupo);
                                     }
                                 });
@@ -237,13 +239,17 @@ module.exports = function(io,Carrera,Grupo){
     return router;
 };
 
-function asociar_Grupo_Alumno(alumno, grupoID){
+function asociar_Grupo_Alumno(AlumnoDB, alumno, grupoID, io){
     //Se asocia el grupo con el alumno
     alumno._grupo = grupoID;
     alumno.save(function(err){ 
         if (err){console.log(chalk.red('Error: '+err));}
         else{
-            console.log(chalk.green('Se registro grupo a alumno: '+alumno));
+            AlumnoDB.findById(alumno._id).populate('_grupo').exec(function(err,alumno){
+                if (err){console.log(chalk.red('Error: '+err));}
+                io.sockets.emit('alumnoInscritoAGrupo', alumno);
+                console.log(chalk.green('Se registro grupo a alumno: '+alumno));
+            });
         }
     });
 }
