@@ -112,6 +112,7 @@ export class CarreraDetailsComponent implements OnInit {
   }
 
   guardarEdicionGrupos(){
+    //Se almacenan los alumnos actualmente dentro de la lista
     this._grupoService.registrarAlumnos(this.grupoID1,this.alumnosEnGrupo1)
     .subscribe(
       (data:Grupo)=>{console.log(data)},

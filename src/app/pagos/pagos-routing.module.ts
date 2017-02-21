@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PagosComponent } from './pagos.component';
 
 const routes: Routes = [
-	{path:'pagosList', component:PagosComponent}
+	{ path:'pagosList', component:PagosComponent 
 ];
 
 @NgModule({
