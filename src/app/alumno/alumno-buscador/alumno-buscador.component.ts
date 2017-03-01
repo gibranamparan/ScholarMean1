@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Alumno } from '../alumno'
+import { AlumnoService } from '../alumno.service';
 
 @Component({
   selector: 'app-alumno-buscador',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./alumno-buscador.component.css']
 })
 export class AlumnoBuscadorComponent implements OnInit {
-
-  constructor() { }
+	Alumnos:Alumno[];
+  constructor(private _alumnoService:AlumnoService) { }
 
   ngOnInit() {
+	this.Alumnos = new Array();
   }
 
 }
