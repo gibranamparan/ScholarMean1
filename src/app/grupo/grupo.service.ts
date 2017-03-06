@@ -33,6 +33,8 @@ export class GrupoService{
 		.map(res=>res.json())
 	}
 
+	/*Dado el ID del grupo y los alumnos a registrar,
+	reemplaza todos los alumnos ya guardados por nuevos*/
 	registrarAlumnos(id,alumnos){
 		return this._http.post(this.domain+'registrarAlumnos/'+id,{"alumnos":alumnos})
 		.map(res=>res.json())

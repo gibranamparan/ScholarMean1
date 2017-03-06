@@ -128,6 +128,8 @@ module.exports = function(io,Carrera){
                 grupo._alumnos = alumnosIDs;
                 grupo.save(function(err){
                     if (err){console.log(chalk.red('Error: '+err));res.send(err);}
+                    
+                    io.sockets.emit('alumnosRegistrados',grupoID);
                     //DISEÑAR EMIT DE CAMBIOS SALVADOS
                     res.json(grupo);
                 });

@@ -17,7 +17,9 @@ export class CarreraDetailsComponent implements OnInit {
 	carreraID:string;
 	carrera:Carrera = new Carrera();
   grupoID1:string;
+  setGrupoID1:string;
   grupoID2:string;
+  setGrupoID2:string;
   alumnosEnGrupo1:any[];
   alumnosEnGrupo2:any[];
   selAlumsGrupo1:any[];
@@ -48,10 +50,14 @@ export class CarreraDetailsComponent implements OnInit {
   	.subscribe(
   		(data:Carrera)=>{
         this.carrera = data;
+        //Se muestra un listado de alumnos en un grupo
         if(this.carrera._grupos.length>0){
           this.grupoID1 = this.carrera._grupos[0]._id;
+          this.setGrupoID1 = this.grupoID1;
+          //Si existe, se muestra el listado de otro grupo
           if(this.carrera._grupos.length>1){
-            this.grupoID2 = this.carrera._grupos[2]._id;
+            this.grupoID2 = this.carrera._grupos[1]._id;
+            this.setGrupoID2 = this.grupoID2;
           }
         }
       },
@@ -111,6 +117,14 @@ export class CarreraDetailsComponent implements OnInit {
     this.alumnosEnGrupo2 = alumnos; 
   }
 
+  cambiaGrupo1(grupoID){
+    this.grupoID1 = grupoID;
+  }
+
+  cambiaGrupo2(grupoID){
+    this.grupoID2 = grupoID; 
+  }
+
   guardarEdicionGrupos(){
     //Se almacenan los alumnos actualmente dentro de la lista
     this._grupoService.registrarAlumnos(this.grupoID1,this.alumnosEnGrupo1)
@@ -123,6 +137,11 @@ export class CarreraDetailsComponent implements OnInit {
       (data:Grupo)=>{console.log(data)},
       (err)=>console.log(err)
     )
+  }
+
+  emitirNotificacion(grupo){
+      this._notificationsService.info("Grupo Modificado",
+        "Grupo "+grupo.nombre+" fue modificado");
   }
 
 }

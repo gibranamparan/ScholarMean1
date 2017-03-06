@@ -1,9 +1,22 @@
-<h3><strong>Grupo: </strong>{{grupo.nombre}}</h3>
+<form class="form-horizontal">
+	<div class="form-group">
+		<label for="selectGroup" class="control-label col-md-2">Grupo:</label>
+		<div class="col-md-10">
+		<select id="selectGroup" name='selectGroup'
+			class="form-control"
+			[(ngModel)]='grupo._id'
+			(change)='cambiaGrupo()'>
+			<option *ngFor='let grupo of selectListGrupos' [value]='grupo._id'>
+				{{grupo.nombre}}
+			</option>
+		</select>
+		</div>
+	</div>
+</form>
 <table class="table table-hover table-striped">
 	<thead>
 		<tr>
-			<th></th>
-			<th>No. Matrícula</th>
+			<th width="20%">No. Matrícula</th>
 			<th>Nombre</th>
 		</tr>
 	</thead>
@@ -11,11 +24,10 @@
 		<tr *ngFor='let alumno of vmAlumnos'
 			(click)='seleccionarAlumno(alumno._id)'
 			[class.selected]='alumno.selected'>
-			<td>XYZ</td>
+			<td width="20%">XYZ</td>
 			<td>
 				{{alumno.ApellidoP+' '+alumno.ApellidoM+' '+alumno.Nombre}}
 			</td>
-			<td></td>
 		</tr>
 	</tbody>
 </table>

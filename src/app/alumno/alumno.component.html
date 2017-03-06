@@ -18,7 +18,7 @@
 				<tr *ngFor='let alumno of Alumnos'>
 					<td>{{alumno.Nombre}}</td>
 					<td>{{alumno.ApellidoP+' '+alumno.ApellidoM}}</td>
-					<td>{{alumno._carrera.abreviacion}}</td>
+					<td>{{alumno._carrera?alumno._carrera.abreviacion:'--'}}</td>
 					<td>
 						<a href="{{'createAlumno/'+alumno._id}}">
 							<i class="glyphicon glyphicon-ok"></i>

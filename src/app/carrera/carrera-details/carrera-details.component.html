@@ -13,8 +13,11 @@
 		[grupoID]='grupoID1'
 		(onRowSelected)='rowSelectedGrupo1($event)'
 		(onBindingAlumnos)='tomarAlumnosGrupo1($event)'
+		(onGroupModifiedBySocket)='emitirNotificacion($event)'
+		(onGroupChanged)='cambiaGrupo1($event)'
 		[vmAlumnosIn] = 'alumnosAIzquierda'
 		[alumnosRemove] = 'alumnosADerecha'
+		[grupoIDIgnorar] = 'grupoID2'
 		[class.col-md-12]='!grupoID2'
 		[class.col-md-5]='grupoID2'
 		#listaGrupo1>
@@ -31,8 +34,11 @@
 		[grupoID]='grupoID2'
 		(onRowSelected)='rowSelectedGrupo2($event)'
 		(onBindingAlumnos)='tomarAlumnosGrupo2($event)'
+		(onGroupModifiedBySocket)='emitirNotificacion($event)'
+		(onGroupChanged)='cambiaGrupo2($event)'
 		[vmAlumnosIn] = 'alumnosADerecha'
 		[alumnosRemove] = 'alumnosAIzquierda'
+		[grupoIDIgnorar] = 'grupoID1'
 		#listaGrupo2>
 	</grupo-simple-list>
 

@@ -6,6 +6,7 @@ grupo-simple-list{
 	margin: .5em;
 	border-radius: 1em;
 	display: block;
+	padding-top: 1em;
 }
 
 #pnlGrupos{
