@@ -4,11 +4,10 @@ import 'rxjs/add/operator/map'
 import { GlobalParamsService } from '../global-params.service';
 import { Grupo } from './grupo';
 
-
 @Injectable()
 export class GrupoService{
 	constructor(private _http:Http,
-		private _globalParams:GlobalParamsService) {}
+		private _globalParams:GlobalParamsService) { }
 
 	private apiURL = '/api/grupo/';
 	private domain=this._globalParams.domain+this.apiURL;

@@ -28,8 +28,8 @@ export class AlumnoService {
 		.map(res=>res.json())
 	}
 
-	addAlumno(Alumno){
-		return this._http.post(this.domain,Alumno)
+	addAlumno(Alumno,User){
+		return this._http.post(this.domain,{alumno:Alumno,user:User})
 		.map(res=>res.json())
 	}
 

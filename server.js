@@ -34,8 +34,12 @@ var CarreraModel = carreraRouterDB.model; //Se toma el modelo
 var grupoRouterDB = require('./server/routes/GrupoRoutes')(io,CarreraModel);
 var routerGrupo = grupoRouterDB.router; //Se toma la ruta
 var GrupoModel = grupoRouterDB.model; //Se toma el modelo
+
+var usuarioRouterDB = require('./server/routes/UsuarioRoutes')(io);
+var routerUsuario = usuarioRouterDB.router; //Se toma la ruta
+var UsuarioModel = usuarioRouterDB.model; //Se toma el modelo
 //Las rutas de alumno ocupan del modelo de carrera
-var routerAlumno = require('./server/routes/AlumnoRoutes')(io,CarreraModel,GrupoModel);
+var routerAlumno = require('./server/routes/AlumnoRoutes')(io,CarreraModel,GrupoModel,UsuarioModel);
 
 // middleware to use for all requests before executing
 app.use(function(req, res, next) {
@@ -48,6 +52,7 @@ app.use(function(req, res, next) {
 app.use('/api', routerCarrera);
 app.use('/api', routerGrupo);
 app.use('/api', routerAlumno);
+app.use('/api', routerUsuario);
 
 
 var depositoRouter = require('./server/routes/DepositoRoutes');

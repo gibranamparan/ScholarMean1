@@ -1,5 +1,5 @@
 var chalk = require('chalk');
-module.exports = function(io,Carrera,Grupo){
+module.exports = function(io, Carrera, Grupo, Usuario){
     var mongoose = require('../../app/models/dbConnection');
     
     //Se importa el modelo
@@ -13,35 +13,46 @@ module.exports = function(io,Carrera,Grupo){
     */
     router.route('/Alumno')
     .post(function(req, res) {
-        // create a new instance of the Alumno model
-        var nuevaAlumno = new Alumno({
-            Nombre:req.body.Nombre,
-            ApellidoP:req.body.ApellidoP,
-            ApellidoM:req.body.ApellidoM,
-            FechaNac:req.body.FechaNac,
-            _carrera: req.body._carrera,
-            _grupo:''
+        var nuevoUsuario = new Usuario({
+            email: req.body.user.email,
+            password: req.body.user.password,
+            rol: "alumno",
         });
-        console.log(nuevaAlumno);
+
+        // create a new instance of the Alumno model
+        var nuevoAlumno = new Alumno({
+            Nombre:req.body.alumno.Nombre,
+            ApellidoP:req.body.alumno.ApellidoP,
+            ApellidoM:req.body.alumno.ApellidoM,
+            FechaNac:req.body.alumno.FechaNac,
+            _carrera: req.body.alumno._carrera,
+            _grupo:'',
+            _usuario: nuevoUsuario._id
+        });
+
         // save the Alumno and check for errors
-        nuevaAlumno.save(function(err) {
+        nuevoAlumno.save(function(err) {
+            //Se guarda usuario asociado al alumno
+            nuevoUsuario.save(function(err){if(err){console.log(chalk.red('error guardar usuario: '+err));res.send(err);}});
+            
             if (err){console.log(chalk.red('error guardar alumno'));res.send(err);}
             else{
                 console.log(chalk.green('**NUEVO ALUMNO CREADO**'));
                 //Si el nuevo alumno es registrado, se relaciona con su carrera
-                Carrera.findById(nuevaAlumno._carrera,
+                Carrera.findById(nuevoAlumno._carrera,
                 function(err,carrera){
                     if (err){console.log('error buscar carrera');res.send(err);}
                     else{
                         //Se hace la relacion alumno-carrera
-                        carrera._alumnos.push(nuevaAlumno);
+                        carrera._alumnos.push(nuevoAlumno);
                         carrera.save(function(err){
                             if(err){console.log('error guardar cambios carrera');res.send(err);}
                             else{
                                 console.log(chalk.green('AlumnoCreado'));
-                                nuevaAlumno._carrera = carrera;
-                                io.sockets.emit('AlumnoCreado',nuevaAlumno);
-                                res.json(nuevaAlumno);
+                                console.log(chalk.green(nuevoAlumno));
+                                nuevoAlumno._carrera = carrera;
+                                io.sockets.emit('AlumnoCreado',nuevoAlumno);
+                                res.json(nuevoAlumno);
                             }
                         });
                     }
@@ -63,6 +74,7 @@ module.exports = function(io,Carrera,Grupo){
             alumnoEditado.ApellidoP=req.body.ApellidoP;
             alumnoEditado.ApellidoM=req.body.ApellidoM;
             alumnoEditado.FechaNac=req.body.FechaNac;
+            alumnoEditado.noMatricula=req.body.noMatricula;
             var tempCarreraID = alumnoEditado._carrera;
             alumnoEditado._carrera= req.body._carrera;
 
@@ -110,7 +122,7 @@ module.exports = function(io,Carrera,Grupo){
 
     // GET /api/Alumno/:soloPreinscritos
     /*
-    * Entrega un listado completo de todos los registros
+    * Entrega un listado completo de todos los alumnos preinscritos
     */
     router.route('/Alumno/soloPreinscritos')
     .get(function(req, res) {
@@ -157,7 +169,7 @@ module.exports = function(io,Carrera,Grupo){
     .get(function(req, res) {
         var id = req.params.id;
         //Se busca por ID
-        Alumno.findById(id, function(err,alumno) {
+        Alumno.findById(id).populate('_usuario').exec(function(err,alumno) {
             if (err){console.log(chalk.red('Error: '+err)); res.send(err);
             }else{
                 res.json(alumno);
@@ -204,7 +216,7 @@ module.exports = function(io,Carrera,Grupo){
                                         if (err){res.send(err);}
                                         else{
                                             //Asociar el grupo al alumno
-                                            asociar_Grupo_Alumno(Alumno,alumno, nuevoGrupo._id, io);
+                                            asociar_Grupo_Alumno(Alumno,alumno, nuevoGrupo, carrera, io);
                                             //Notificar creacion de nuevo grupo
                                             console.log(chalk.green('**grupoCreado: '+nuevoGrupo));
                                             io.sockets.emit('grupoCreado',nuevoGrupo);
@@ -216,14 +228,15 @@ module.exports = function(io,Carrera,Grupo){
                         //Si la carrera ya tenia grupos registrados
                         }else{
                             //Se busca el primer grupo de la carrera y se asocia el alumno
-                            Grupo.findById(carrera._grupos[0]._id,function(err,grupo){
+                            Grupo.findById(carrera._grupos[0]._id).populate('_carrera').exec(function(err,grupo){
+                                console.log(chalk.blue('grupo: '+grupo));
                                 grupo._alumnos.push(alumno._id);
                                 grupo.save(function(err){
                                     if (err){res.send(err);}
                                     else{
                                         console.log(chalk.green('**Alumno '+alumno._id+' asociado a grupo '+grupo._id));
                                         //Asociar grupo a alumno
-                                        asociar_Grupo_Alumno(Alumno,alumno, grupo._id, io);
+                                        asociar_Grupo_Alumno(Alumno,alumno, grupo,grupo._carrera, io);
                                         res.json(grupo);
                                     }
                                 });
@@ -239,9 +252,23 @@ module.exports = function(io,Carrera,Grupo){
     return router;
 };
 
-function asociar_Grupo_Alumno(AlumnoDB, alumno, grupoID, io){
+function asociar_Grupo_Alumno(AlumnoDB, alumno, grupo,carrera, io){
     //Se asocia el grupo con el alumno
-    alumno._grupo = grupoID;
+    alumno._grupo = grupo._id;
+
+    /*Se genera el numero de matricula con el formato YY30NNCCC donde:
+        YY: Digitos del año
+        NN: Num. Carrera x 10
+        CCC: Contador alumnos */
+    var noMatricula = alumno.createdAt.getFullYear().toString().substr(2,2);
+    noMatricula+='30';
+    noMatricula+=carrera.num*10;
+    var numAlumnos = grupo._alumnos.length;
+    noMatricula+=numAlumnos<10?'0'+numAlumnos:numAlumnos;
+    alumno.noMatricula = noMatricula;
+    console.log(chalk.red(alumno.noMatricula));
+
+    //Se guardan los cambios en el alumno
     alumno.save(function(err){ 
         if (err){console.log(chalk.red('Error: '+err));}
         else{

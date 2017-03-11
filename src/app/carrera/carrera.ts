@@ -4,6 +4,7 @@ export class Carrera{
 		public _id?:string,
 		public nombre?:string,	
 		public abreviacion?:string,
-		public _grupos?:Grupo[]
+		public _grupos?:Grupo[],
+		public num?:number,
 	){}
 }

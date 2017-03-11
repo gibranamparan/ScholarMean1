@@ -18,16 +18,22 @@
 		<tr>
 			<th width="20%">No. Matrícula</th>
 			<th>Nombre</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr *ngFor='let alumno of vmAlumnos'
 			(click)='seleccionarAlumno(alumno._id)'
 			[class.selected]='alumno.selected'>
-			<td width="20%">XYZ</td>
+			<td width="20%">{{alumno.noMatricula?alumno.noMatricula:'00000000'}}</td>
 			<td>
 				{{alumno.ApellidoP+' '+alumno.ApellidoM+' '+alumno.Nombre}}
 			</td>
+			<th>
+			<a  [routerLink]="['/createAlumno',{id:alumno._id}]">
+				<i class="glyphicon glyphicon-edit"></i>
+			</a>
+			</th>
 		</tr>
 	</tbody>
 </table>

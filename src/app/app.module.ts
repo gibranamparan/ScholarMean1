@@ -10,6 +10,7 @@ import { AlumnoModule } from './alumno/alumno.module';
 import { GrupoModule } from './grupo/grupo.module';
 import { CarreraModule } from './carrera/carrera.module';
 import { PagosModule } from './pagos/pagos.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 /*COMPONENTES*/
 import { AppComponent } from './app.component';
@@ -36,6 +37,7 @@ const routes: Routes = [
     GrupoModule,
     HttpModule,
     PagosModule,
+    UsuarioModule,
     RouterModule.forRoot(routes)
   ],
   providers: [GlobalParamsService],

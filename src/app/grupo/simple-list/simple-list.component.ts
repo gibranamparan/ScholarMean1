@@ -124,6 +124,7 @@ export class SimpleListComponent implements OnInit {
 		this._grupoIDIgnorar = grupoIDIgnorar;
 		if(this.grupos)
 			this.ignorarGrupo();
+		this.cargarAlumnos();
 	}
 
 	/*SE RECIBEN LOS ESTUDIANTES SELECCIONADOS DE UN GRUPO DIFERENTE*/

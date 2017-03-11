@@ -46,6 +46,7 @@ module.exports = function(io){
         Carrera.findById(req.body._id,function(err,carrera){
             carrera.nombre = req.body.nombre;
             carrera.abreviacion = req.body.abreviacion;
+            carrera.num = req.body.num;
             // save the Carrera and check for errors
             carrera.save(function(err) {
                 if (err){

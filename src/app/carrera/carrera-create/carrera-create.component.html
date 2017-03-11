@@ -7,7 +7,13 @@
 		<input class="form-control" id="abreviacion" name="abreviacion"
 		[(ngModel)]='nuevaCarrera.abreviacion' #abreviacion='ngModel' placeholder="Abreviacion">
 	</div>
-	<button type="submit" class="btn btn-primary">{{accionForm}}</button>
-	<button type="submit" class="btn btn-primary" *ngIf='accionForm=="Editar"'
+	<div class="form-group col-md-6">
+		<input class="form-control" id="num" name="num" type="number" 
+		[(ngModel)]='nuevaCarrera.num' #num='ngModel' placeholder="Numero">
+	</div>
+	<div class="col-md-12">
+		<button type="submit" class="btn btn-primary">{{accionForm}}</button>
+		<button type="submit" class="btn btn-primary" *ngIf='accionForm=="Editar"'
 		(click)='cancelar()'>Cancelar</button>
+	</div>
 </form>

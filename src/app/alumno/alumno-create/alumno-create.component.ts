@@ -5,6 +5,7 @@ import { GrupoService } from '../../grupo/grupo.service';
 import { Carrera } from '../../carrera/carrera';
 import { Alumno } from '../../alumno/alumno';
 import { Grupo } from '../../grupo/grupo';
+import { UserLogin } from '../../usuario/userLogin';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {Subscriber} from 'rxjs';
@@ -21,6 +22,7 @@ export class AlumnoCreateComponent implements OnInit {
 	nuevoAlumno = new Alumno();
 	alumnoID:string;
 	alumnoStatus;
+	userLogin:UserLogin = new UserLogin();
 
 	private _moment = moment();
 	constructor(private _carreraService:CarreraService,
@@ -45,6 +47,7 @@ export class AlumnoCreateComponent implements OnInit {
 							moment(this.nuevoAlumno.FechaNac)
 							.format('YYYY-MM-DD');
 						console.log(this.nuevoAlumno.FechaNac);
+						this.userLogin = this.nuevoAlumno._usuario;
 		        	},
 					error=>alert(error),
 					()=>console.log('done!')
@@ -79,7 +82,7 @@ export class AlumnoCreateComponent implements OnInit {
 	}
 
 	agregarAlumno(){
-		this._alumnoService.addAlumno(this.nuevoAlumno)
+		this._alumnoService.addAlumno(this.nuevoAlumno, this.userLogin)
 		.subscribe(
 			(data:Alumno)=>{ },
 			error=>alert(error),
@@ -125,6 +128,10 @@ export class AlumnoCreateComponent implements OnInit {
 		else if(this.nuevoAlumno._carrera){
 			this.alumnoStatus = AlumnoStatus.Preinscrito;
 		}
+	}
+
+	estaInscrito(){
+		return this.alumnoStatus == AlumnoStatus.Inscrito;
 	}
 
 	showInscribirButton(){

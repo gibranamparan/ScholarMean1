@@ -10,7 +10,9 @@ export class Alumno{
 		public FechaNac?:string,
 		public _carrera?:Carrera,
 		public _grupo?:Grupo,
-		public createdAt?:Date
+		public createdAt?:Date,
+		public noMatricula?: String,
+		public _usuario?:any,
 	){ }
 
 	public get NombreCompleto(){
