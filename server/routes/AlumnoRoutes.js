@@ -177,10 +177,10 @@ module.exports = function(io, Carrera, Grupo, Usuario){
         });
     });
 
-    // GET /api/Alumno:id
+    // GET /api/Alumno/registrarAlumno:id
     /*
-    * Entrega toda la informacion concreta dado
-    * un ID sobre un registro especifico de esta entidad
+    * Se confirma la inscripcion de un estudiante, registrandolo a un grupo
+    * por defecto, en caso de no existir grupo, crea uno y es registrado
     */
     router.route('/Alumno/registrarAlumno/:id')
     .get(function(req, res) {
@@ -272,9 +272,10 @@ function asociar_Grupo_Alumno(AlumnoDB, alumno, grupo,carrera, io){
     alumno.save(function(err){ 
         if (err){console.log(chalk.red('Error: '+err));}
         else{
-            AlumnoDB.findById(alumno._id).populate('_grupo').exec(function(err,alumno){
+            AlumnoDB.findById(alumno._id).populate('_grupo').populate('_carrera')
+            .exec(function(err,alumno){
                 if (err){console.log(chalk.red('Error: '+err));}
-                io.sockets.emit('alumnoInscritoAGrupo', alumno);
+                io.sockets.emit('AlumnoInscritoAGrupo', alumno);
                 console.log(chalk.green('Se registro grupo a alumno: '+alumno));
             });
         }

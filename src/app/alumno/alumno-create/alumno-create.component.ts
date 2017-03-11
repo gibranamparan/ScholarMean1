@@ -21,7 +21,7 @@ export class AlumnoCreateComponent implements OnInit {
 	Carreras:Carrera[]
 	nuevoAlumno = new Alumno();
 	alumnoID:string;
-	alumnoStatus;
+	alumnoStatus = AlumnoStatus.EnRegistro;
 	userLogin:UserLogin = new UserLogin();
 
 	private _moment = moment();
@@ -48,6 +48,8 @@ export class AlumnoCreateComponent implements OnInit {
 							.format('YYYY-MM-DD');
 						console.log(this.nuevoAlumno.FechaNac);
 						this.userLogin = this.nuevoAlumno._usuario;
+
+						this.determinarStatusAlumno();
 		        	},
 					error=>alert(error),
 					()=>console.log('done!')
@@ -73,9 +75,11 @@ export class AlumnoCreateComponent implements OnInit {
 
 	guardarAlumno(){
 		if(this.alumnoStatus == AlumnoStatus.EnRegistro){
+			//Si el alumno esta en registro, se crea nuevo registro
 			this.agregarAlumno();
 		}else
 		{
+			//Si ya estaba registrado, solo se modifica
 			this.modificarAlumno();
 		}
 		this._router.navigate(['alumno']);
@@ -120,14 +124,14 @@ export class AlumnoCreateComponent implements OnInit {
 	}
 
 	determinarStatusAlumno(){
-		//Default status
-		this.alumnoStatus = AlumnoStatus.EnRegistro;
-
+		//Esta inscrito si tiene grupo
 		if(this.nuevoAlumno._grupo)
 			this.alumnoStatus = AlumnoStatus.Inscrito;
+		//Si no tiene grupo pero si carrera, esta preinscrito
 		else if(this.nuevoAlumno._carrera){
 			this.alumnoStatus = AlumnoStatus.Preinscrito;
 		}
+		//Si no cumple con ninguna condicion previa, esta en registro
 	}
 
 	estaInscrito(){

@@ -17,7 +17,7 @@ export class AlumnoService {
 	private apiURL = '/api/Alumno/';
 	private domain = this._globalParams.domain+this.apiURL;
 
-	getAlumnos(soloPreinscritos){
+	getAlumnos(soloPreinscritos:boolean){
 		return this._http.get(this.domain+
 			(soloPreinscritos?'soloPreinscritos/':''))
 		.map(res=>res.json())

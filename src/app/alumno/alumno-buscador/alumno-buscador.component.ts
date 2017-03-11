@@ -8,11 +8,23 @@ import { AlumnoService } from '../alumno.service';
   styleUrls: ['./alumno-buscador.component.css']
 })
 export class AlumnoBuscadorComponent implements OnInit {
-	Alumnos:Alumno[];
+	Alumnos:Alumno[] = new Array();
   constructor(private _alumnoService:AlumnoService) { }
 
   ngOnInit() {
-	this.Alumnos = new Array();
+  	this.showAlumnos();
   }
 
+  showAlumnos(){
+  	this._alumnoService.getAlumnos(false)
+  	.subscribe(
+  		(data:Alumno[])=>{
+  			this.Alumnos = data;
+  			console.log(this.Alumnos)
+  		},
+  		err=>{
+  			console.log(err);
+  		}
+	)
+  }
 }

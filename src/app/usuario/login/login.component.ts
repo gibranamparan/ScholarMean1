@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
 				alert(JSON.stringify(data));
 				if(data._id){
 					alert("LOGEADO!");
+					//Guarda el usuario logeado en localStorage
+
 				}else{
 					alert("Nel no entras");
 				}

@@ -66,6 +66,19 @@ export class AlumnoComponent implements OnInit {
 			this._notificationsService.info("Eliminado",
 				"Registro de preinscripción eliminado");
 	    }.bind(this));
+
+	    //Evento de deteccion de registro eliminado
+	    this.socket.on('AlumnoInscritoAGrupo', function(alumno){
+			var alumnoBorrado = this.Alumnos.filter(alu=>alu._id==alumno._id)[0];
+			if(alumnoBorrado)
+				this.Alumnos.splice(this.Alumnos.indexOf(alumnoBorrado), 1);
+			//let carrera = data._carrera.abreviacion;
+			this._notificationsService.info("Inscrito",
+				"Aprobada inscripcion del estudiante: "
+				+alumno.Nombre+" "+alumno.ApellidoP+" "+alumno.ApellidoM
+				+" en "+alumno._carrera.nombre);
+	    }.bind(this))
+
 	}
 
 	//Toma datos del servidor y los pone a disposicion del componente
