@@ -105,16 +105,51 @@ module.exports = function(io, Carrera, Grupo, Usuario){
         });
     });
 
-    // GET /api/Alumno/:soloPreinscritos
+    // POST /api/Alumno/
     /*
     * Entrega un listado completo de todos los registros
     */
-    router.route('/Alumno/')
-    .get(function(req, res) {
+    router.route('/Alumno/buscar')
+    .post(function(req, res) {
+        console.log(chalk.blue("POST /api/Alumno/buscar"));
+        console.log(chalk.blue('Nombre:')+chalk.red(req.body.Nombre));
+        console.log(chalk.blue('Carrera:')+chalk.red(req.body._carrera));
+        var regexNombre = new RegExp(req.body.Nombre,'i');
         //Listado de todas las Alumnos
-        Alumno.find().populate("_carrera").exec(function(err,Alumnos) {
+        Alumno.find({
+            $and:[
+                {_carrera:req.body._carrera?req.body._carrera:{$ne:null}},
+                {_grupo:req.body._grupo?req.body._grupo:{$ne:null}},
+                {$or:[
+                    {ApellidoM:regexNombre},
+                    {ApellidoP:regexNombre},
+                    {Nombre:regexNombre},
+                ]}
+            ]
+        })
+        .where('_grupo').ne("")
+        .populate("_grupo")
+        .exec(function(err,Alumnos) {
             if (err){console.log(chalk.red('Error: '+err));res.send(err);}
             else{
+                res.json(Alumnos);
+            }
+        });
+    });
+
+    // GET /api/Alumno/:soloPreinscritos
+    /*
+    * Entrega un listado completo de todos los alumnos preinscritos
+    */
+    router.route('/Alumno/')
+    .get(function(req, res) {
+
+        //Listado de todas las Alumnos
+        Alumno.find().populate("_carrera").exec(function(err,Alumnos) {
+            //console.log(Alumnos);
+
+            if (err){console.log(chalk.red('Error: '+err));res.send(err);
+            }else{
                 res.json(Alumnos);
             }
         });

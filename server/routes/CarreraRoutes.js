@@ -70,7 +70,7 @@ module.exports = function(io){
     .get(function(req, res) {
 
         //Listado de todas las carreras
-        Carrera.find(function(err,carreras) {
+        Carrera.find().populate('_grupos').exec(function(err,carreras) {
             if (err){
                 console.log('Error');
                 res.send(err);

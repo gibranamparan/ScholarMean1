@@ -23,6 +23,11 @@ export class AlumnoService {
 		.map(res=>res.json())
 	}
 
+	getAlumnosInscritos(filtro:Alumno){
+		return this._http.post(this.domain+'buscar',filtro)
+		.map(res=>res.json())
+	}
+
 	getAlumno(id){
 		return this._http.get(this.domain+id)
 		.map(res=>res.json())
