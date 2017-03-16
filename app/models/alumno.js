@@ -10,6 +10,8 @@ var AlumnoSchema   = new Schema({
 	_carrera : { type: String, ref: 'Carrera' },
 	_grupo :  { type: String, ref: 'Grupo' },
 	_usuario : { type: String, ref: 'Usuario' },
+	_depositos : [{ type: Schema.Types.ObjectId, ref: 'Deposito' }]
+
 },
 {
   timestamps: true

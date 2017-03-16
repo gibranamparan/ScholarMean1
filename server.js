@@ -55,7 +55,7 @@ app.use('/api', routerAlumno);
 app.use('/api', routerUsuario);
 
 
-var depositoRouter = require('./server/routes/DepositoRoutes');
+var depositoRouter = require('./server/routes/DepositoRoutes')(io);
 app.use('/api', depositoRouter);
 
 // Catch all other routes and return the index file

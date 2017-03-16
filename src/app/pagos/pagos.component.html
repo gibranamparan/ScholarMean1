@@ -1,3 +1,22 @@
-<p>
-  pagos works!
-</p>
+<simple-notifications [options]="notifOptions"></simple-notifications>
+<a href="createPago">Nuevo Pago</a>
+<h1>
+  Pagos
+</h1>
+<table class="table table-hover table-stripped">
+	<tr>
+		<th>Monto</th>
+		<th>Fecha</th>
+		<th></th>
+	</tr>
+	<tr *ngFor='let pago of pagos'>
+		<td>{{pago.monto}}</td>
+		<td>{{pago.fecha}}</td>
+		<td>XYZ</td>
+		<td>
+			<a href="">
+				<i class="glyphicon glyphicon-list" aria-hidden="true"></i> Lista
+			</a>
+		</td>
+	</tr>
+</table>

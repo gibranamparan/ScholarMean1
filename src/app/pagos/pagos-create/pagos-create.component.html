@@ -1,0 +1,31 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Formato de Pagos</h3>
+	</div>
+	<div class="panel-body">
+		<form #nuevoPagoForm='ngForm' (submit)='agregarPago()'>
+			<div class="form-group col-md-6">
+				<label for="">Monto</label>
+				<input type="text" class="form-control" id="Monto" name="Monto" placeholder="Monto"
+				[(ngModel)]='nuevoPago.monto' #Monto='ngModel'
+				[value]='nuevoPago.monto'>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="">FechaPago</label>
+				<input type="date" class="form-control" id="FechaPago" name="FechaPago" placeholder="Fecha de Pago"
+				[(ngModel)]='nuevoPago.fecha'
+				[value]="nuevoPago.fecha" >
+			</div>
+			<div class="col-md-12">
+				<button type="submit" class="btn btn-primary">
+					Guardar
+				</button>
+				<span class="btn btn-success"
+				(click)='agregarPago()'>
+				Agregar
+				</span>
+				<span>{{testJson}}</span><br>
+			</div>
+		</form>
+	</div>
+</div>
