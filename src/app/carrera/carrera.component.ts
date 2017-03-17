@@ -32,6 +32,15 @@ export class CarreraComponent implements OnInit {
   socket = this.io(this._globalParams.domain);
 
   ngOnInit(){
+    var usuario = JSON.parse(localStorage.getItem('currentUser'));
+    //var usuario = localStorage.getItem('currentUser');
+     if(usuario){
+       alert("Si estas logeado");
+
+     }else{
+
+       alert("NO estas logeado");
+     }
   	this.showCarreras();
     //Evento de deteccion de registro creado
     this.socket.on('carreraCreada', function(data){

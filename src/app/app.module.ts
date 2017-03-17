@@ -21,7 +21,7 @@ import { GlobalParamsService } from './global-params.service';
 
 const routes: Routes = [
   { path:'appRoot', component:AppComponent },
-  { path: '',   redirectTo: 'carrera', pathMatch: 'full' },
+  { path: '',   redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

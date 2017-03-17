@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalParamsService } from '../global-params.service';
+import {UserLogin} from '../usuario/userLogin';
 
 @Component({
   selector: 'sidebarmenu',
@@ -6,20 +8,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebarmenu.component.css']
 })
 export class SidebarmenuComponent implements OnInit {
+  showNavBar: boolean = false;
+  usuario:UserLogin = new UserLogin();
 
-  constructor() { }
+  constructor(private globalEventsManager: GlobalParamsService) {
+    
+   }
 
-  ngOnInit() {
-  	//toma el usuario logeado de local storage
-  	//imprimelo con un alert
+ ngOnInit() {
+    //var usuario = localStorage.getItem('currentUser');
+     this.globalEventsManager.showNavBarEmitter.subscribe((modo:boolean)=>{
+         this.usuario = JSON.parse(localStorage.getItem('currentUser'));
+          // mode will be null the first time it is created, so you need to igonore it when null
+          if(modo!==null)
+            this.showNavBar = modo;
+      });
   }
 
-  estaLogeado(){
-  	//Si esta logeado
-  	return true;
+ 
+  logout() {
+        // remove user from local storage to log user out
+        localStorage.removeItem('currentUser');
+        this.globalEventsManager.showNavBar(false);
 
-  	//Si no
-  	//return false;
-  }
+    }
 
 }

@@ -3,5 +3,6 @@ export class UserLogin{
 		public email?: string,
 		public password?: string,
 		public _id?: string,
+		public rol?: string,
 	){}
 }

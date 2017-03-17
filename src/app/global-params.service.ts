@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Modal } from 'angular2-modal/plugins/bootstrap';
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { Observable } from "rxjs/Observable";
+import { UserLogin } from './usuario/userLogin'
+
 
 @Injectable()
 export class GlobalParamsService {
+	private _showNavBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+    public showNavBarEmitter: Observable<boolean> = this._showNavBar.asObservable();
 	
 	public readonly notificationOptions = { //Opciones de notificacion
 		position: ["top", "right"], timeOut: 4000,
@@ -13,6 +19,9 @@ export class GlobalParamsService {
 	//public readonly domain='https://scholarnode.herokuapp.com';
 
   	constructor() { }
+  	showNavBar(modo:boolean) {
+        this._showNavBar.next(modo);
+    }
 
   	//Prepara una ventana de confirmacion modal
   	//de 2 botones: OK y cancel

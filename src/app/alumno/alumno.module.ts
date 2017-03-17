@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { CarreraService } from '../carrera/carrera-service.service';
 import { AlumnoBuscadorComponent } from './alumno-buscador/alumno-buscador.component';
+import { AlumnoDetailsComponent } from './alumno-details/alumno-details.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { AlumnoBuscadorComponent } from './alumno-buscador/alumno-buscador.compo
     Ng2TableModule,
     SimpleNotificationsModule
   ],
-  declarations: [AlumnoComponent, AlumnoCreateComponent, AlumnoBuscadorComponent],
+  declarations: [AlumnoComponent, AlumnoCreateComponent, AlumnoBuscadorComponent, AlumnoDetailsComponent],
   providers: [AlumnoService, CarreraService]
 })
 export class AlumnoModule { }

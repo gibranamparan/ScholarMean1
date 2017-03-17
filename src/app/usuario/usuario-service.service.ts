@@ -14,6 +14,15 @@ export class UsuarioService {
 
 	autenticar(userLogin:UserLogin){
 		return this._http.post(this.domain+'authenticate', userLogin)
-		.map(res=>res.json())
+		.map((res)=>{
+
+            // login successful if there's a jwt token in the response
+            let user = res.json();
+            if (user && user._id) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('currentUser', JSON.stringify(user));
+            }
+             return user;
+		})
 	}
 }
