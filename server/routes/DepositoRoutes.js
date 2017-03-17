@@ -13,7 +13,7 @@ module.exports = function(io){
 	//GET localhost:8000/api/Depositos
 	router.route("/Depositos")
 		.get(function(req,res){
-			Deposito.find(function(err,depositos){
+			Deposito.find().populate('_alumnoID').exec(function(err,depositos){
 				if(err){res.send(err);}
 				else{
 					res.json(depositos);

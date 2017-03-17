@@ -7,7 +7,7 @@
 	<tr>
 		<th>Monto</th>
 		<th>Fecha</th>
-		<th></th>
+		<th>Alumno</th>
 	</tr>
 	<tr *ngFor='let pago of pagos'>
 		<td>{{pago.monto}}</td>
@@ -16,6 +16,10 @@
 		<td>
 			<a href="">
 				<i class="glyphicon glyphicon-list" aria-hidden="true"></i> Lista
+			</a>
+			 | 
+			<a href="">
+				<i class="fa fa-money fa-lg" aria-hidden="true"></i> Pagos
 			</a>
 		</td>
 	</tr>

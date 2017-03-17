@@ -63,8 +63,12 @@
 					<td>{{alumno.Nombre}}</td>
 					<td>{{alumno.ApellidoP+' '+alumno.ApellidoM}}</td>
 					<td>
-						<a href="{{'createAlumno/'+alumno._id}}">
+						<a href="{{'createAlumno/'+alumno._id}}" title="Detalles">
 							<i class="fa fa-address-card-o" aria-hidden="true"></i>
+						</a>
+						|
+						<a href="createPago" title="Nuevo Pago">
+							<i class="fa fa-money" aria-hidden="true"></i>
 						</a>
 					</td>
 				</tr>
