@@ -200,11 +200,11 @@ module.exports = function(io, Carrera, Grupo, Usuario){
     * Entrega toda la informacion concreta dado
     * un ID sobre un registro especifico de esta entidad
     */
-    router.route('/Alumno/:id')
+    router.route('/Alumno/getUser/:id')
     .get(function(req, res) {
         var id = req.params.id;
         //Se busca por ID
-        Alumno.findById(id).populate('_usuario').exec(function(err,alumno) {
+        Alumno.findOne({_usuario:id}).populate('_usuario').populate('_carrera').exec(function(err,alumno) {
             if (err){console.log(chalk.red('Error: '+err)); res.send(err);
             }else{
                 res.json(alumno);

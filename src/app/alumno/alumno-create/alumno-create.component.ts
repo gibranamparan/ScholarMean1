@@ -82,7 +82,7 @@ export class AlumnoCreateComponent implements OnInit {
 			//Si ya estaba registrado, solo se modifica
 			this.modificarAlumno();
 		}
-		this._router.navigate(['alumno']);
+		this._router.navigate(['login']);
 	}
 
 	agregarAlumno(){

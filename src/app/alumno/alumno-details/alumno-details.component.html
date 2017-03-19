@@ -2,38 +2,33 @@
 	<div class="panel panel-success class">
 		<div class="panel-heading">	Alumno</div>
 			<div class="panel-body">
-				
-					<div class="form-group col-md-12">
-						<span>ID</span>
 
+					<div class="form-group col-md-12">
+						<span>Nombre</span><p>{{alumno.Nombre}}</p>
 						
 					</div>
 					<div class="form-group col-md-12">
-						<span>Nombre</span>
+						<span>Apellido Paterno</span><p>{{alumno.ApellidoP}}</p>
 						
 					</div>
 					<div class="form-group col-md-12">
-						<span>Apellido Paterno</span>
+						<span>Apellido Materno</span><p>{{alumno.ApellidoM}}</p>
 						
 					</div>
 					<div class="form-group col-md-12">
-						<span>Apellido Materno</span>
+						<span>Fecha Nacimiento</span><p>{{alumno.FechaNac}}</p>
 						
 					</div>
 					<div class="form-group col-md-12">
-						<span>Fecha Nacimiento</span>
+						<span>Carrera</span><p *ngIf='alumno._carrera'>{{alumno._carrera.nombre}}</p>
 						
 					</div>
 					<div class="form-group col-md-12">
-						<span>Carrera</span>
+						<span>Grupo</span><p >{{(alumno._grupo?alumno._grupo.nombre:'Tu inscripcion no ha sido aprobada')}}</p>
 						
 					</div>
 					<div class="form-group col-md-12">
-						<span>Grupo</span>
-						
-					</div>
-					<div class="form-group col-md-12">
-						<span>noMatricula</span>
+						<span>noMatricula</span><p>{{alumno.noMatricula}}</p>
 						
 					</div>
 				
