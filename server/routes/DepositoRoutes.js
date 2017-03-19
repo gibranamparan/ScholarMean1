@@ -36,7 +36,7 @@ module.exports = function(io){
 					io.sockets.emit('pagoCreado',nuevoDeposito);
 					res.json(nuevoDeposito);
 				}
-			})
+			});
 			
 	});
 
@@ -76,7 +76,7 @@ module.exports = function(io){
 					deposito.save(function(err){
 						if(err){res.send(err);}
 						else{
-							res.json(deposito)
+							res.json(deposito);
 						}
 						
 					});
