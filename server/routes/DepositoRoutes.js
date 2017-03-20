@@ -53,7 +53,7 @@ module.exports = function(io, Alumno){
 	                    }
 	                });
 				}
-			})
+			});
 			
 	});
 
@@ -93,7 +93,7 @@ module.exports = function(io, Alumno){
 					deposito.save(function(err){
 						if(err){res.send(err);}
 						else{
-							res.json(deposito)
+							res.json(deposito);
 						}
 						
 					});

@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 		private _usuarioService:UsuarioService,
 		private _globalEventsManager: GlobalParamsService,
 		private router: Router,
-) { }
+	) { }
 
 	ngOnInit() {
 	}
@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
 		this._usuarioService.autenticar(this.userLogin)
 		.subscribe(
 			(data:UserLogin)=>{
-				alert(JSON.stringify(data));
 				localStorage.setItem('currentUser',JSON.stringify(data));
 
 				if(data._id){
@@ -42,15 +41,10 @@ export class LoginComponent implements OnInit {
 						this.returnUrl = 'pagosList';
 					}
 					
-					console.log("LOGEADO!");
 					this._globalEventsManager.showNavBar(true);
 					this.router.navigate([this.returnUrl]);
-
-					//this.router.navigate([this.returnUrl]);
 				}else{
-					console.log("Nel no entras");
 					this._globalEventsManager.showNavBar(false);
-					//this.loading = false;
 				}
 			},
 			error=>{

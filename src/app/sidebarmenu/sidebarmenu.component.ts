@@ -19,9 +19,16 @@ export class SidebarmenuComponent implements OnInit {
     //var usuario = localStorage.getItem('currentUser');
      this.globalEventsManager.showNavBarEmitter.subscribe((modo:boolean)=>{
          this.usuario = JSON.parse(localStorage.getItem('currentUser'));
+
           // mode will be null the first time it is created, so you need to igonore it when null
-          if(modo!==null)
+          if(modo!==null){
             this.showNavBar = modo;
+          }
+          else{
+            //If null, user logged is determined if this.usuario is not null
+            modo = this.usuario?true:false;
+            this.showNavBar = modo;
+          }
       });
   }
 
