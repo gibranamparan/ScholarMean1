@@ -12,6 +12,8 @@ import {Subscriber} from 'rxjs';
 import * as moment from 'moment';
 
 
+
+
 @Component({
   selector: 'app-alumno-create',
   templateUrl: './alumno-create.component.html',
@@ -74,6 +76,7 @@ export class AlumnoCreateComponent implements OnInit {
 	}
 
 	guardarAlumno(){
+		let usuario:UserLogin = JSON.parse(localStorage.getItem('currentUser'));
 		if(this.alumnoStatus == AlumnoStatus.EnRegistro){
 			//Si el alumno esta en registro, se crea nuevo registro
 			this.agregarAlumno();
@@ -82,7 +85,18 @@ export class AlumnoCreateComponent implements OnInit {
 			//Si ya estaba registrado, solo se modifica
 			this.modificarAlumno();
 		}
+<<<<<<< HEAD
 		this._router.navigate(['alumno']);
+=======
+			if(!usuario)
+			{
+				this._router.navigate(['login']);
+			}else if(usuario.rol=='admin'){
+				this._router.navigate(['carrera']);
+			}
+			
+		
+>>>>>>> origin/master
 	}
 
 	agregarAlumno(){

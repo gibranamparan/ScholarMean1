@@ -9,13 +9,13 @@
 				<div class="form-group col-md-6">
 					<label for="email">Email</label>
 					<input type="text" class="form-control" id="email" name="email" placeholder="Email"
-						[(ngModel)]='userLogin.email' #email='ngModel'>
+						[(ngModel)]='userLogin.email' #email='ngModel' autocomplete="off">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="password">Password</label>
 					<input type="text" class="form-control" type="password" id="password"
 						name="password" placeholder="Password"
-						[(ngModel)]='userLogin.password' #password='ngModel'>
+						[(ngModel)]='userLogin.password' #password='ngModel' autocomplete="off">
 				</div>
 			</div>
 			<div>
@@ -23,29 +23,29 @@
 				<div *ngIf='estaInscrito()' class="form-group col-md-6">
 					<label for="">No. Matricula</label>
 					<input type="text" class="form-control" id="noMatricula" name="noMatricula" placeholder="No. Matricula"
-					[(ngModel)]='nuevoAlumno.noMatricula' #noMatricula='ngModel'>
+					[(ngModel)]='nuevoAlumno.noMatricula' #noMatricula='ngModel' autocomplete="off">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="">Nombre</label>
 					<input type="text" class="form-control" id="Nombre" name="Nombre" placeholder="Nombre"
 					[(ngModel)]='nuevoAlumno.Nombre' #Nombre='ngModel'
-					[value]='dateObj | date'>
+					[value]='dateObj | date' autocomplete="off">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="">Apellido Paterno</label>
 					<input type="text" class="form-control" id="ApellidoP" name="ApellidoP" placeholder="Apellido Paterno"
-					[(ngModel)]='nuevoAlumno.ApellidoP' #ApellidoP='ngModel' >
+					[(ngModel)]='nuevoAlumno.ApellidoP' #ApellidoP='ngModel' autocomplete="off">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="">Apellido Materno</label>
 					<input type="text" class="form-control" id="ApellidoM" name="ApellidoM" placeholder="Apellido Materno"
-					[(ngModel)]='nuevoAlumno.ApellidoM' #ApellidoM='ngModel' >
+					[(ngModel)]='nuevoAlumno.ApellidoM' #ApellidoM='ngModel' autocomplete="off">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="">FechaNac</label>
 					<input type="date" class="form-control" id="FechaNac" name="FechaNac" placeholder="Fecha de Nacimiento"
 					[(ngModel)]='nuevoAlumno.FechaNac'
-					[value]="nuevoAlumno.FechaNac" >
+					[value]="nuevoAlumno.FechaNac" autocomplete="off">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="carrera">Carrera</label>
