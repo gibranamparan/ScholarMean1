@@ -1,4 +1,5 @@
-module.exports = function(io){
+var chalk = require('chalk');
+module.exports = function(io, Alumno){
 //Codigo para conectar a base de datos Mongo
 	var mongoose = require('../../app/models/dbConnection');
 
@@ -34,7 +35,23 @@ module.exports = function(io){
 				else{
 					console.log("Se dio de alta deposito");
 					io.sockets.emit('pagoCreado',nuevoDeposito);
-					res.json(nuevoDeposito);
+					Alumno.findById(nuevoDeposito._alumno, function(err,alumno){
+	                    if (err){console.log('error buscar alumno');res.send(err);}
+	                    else{
+	                        //Se hace la relacion deposito-alumno
+	                        alumno._depositos.push(nuevoDeposito);
+	                        alumno.save(function(err){
+	                            if(err){console.log('error guardar cambios alumno');res.send(err);}
+	                            else{
+	                                console.log(chalk.green('depositoCreado'));
+	                                console.log(chalk.green(nuevoDeposito));
+	                                nuevoDeposito._alumno = Deposito;
+	                                io.sockets.emit('depositoCreado',nuevoDeposito);
+	                                res.json(nuevoDeposito);
+	                            }
+	                        });
+	                    }
+	                });
 				}
 			})
 			

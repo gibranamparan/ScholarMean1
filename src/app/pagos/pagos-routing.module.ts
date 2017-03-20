@@ -5,7 +5,8 @@ import { PagosCreateComponent } from './pagos-create/pagos-create.component';
 
 const routes: Routes = [
 	{ path:'pagosList', component:PagosComponent} ,
-	{ path:'createPago', component:PagosCreateComponent} 
+	{ path:'createPago', component:PagosCreateComponent}, 
+	{ path:'createPago/:id', component:PagosCreateComponent}
 ];
 
 @NgModule({

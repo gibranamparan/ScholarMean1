@@ -39,7 +39,9 @@ var usuarioRouterDB = require('./server/routes/UsuarioRoutes')(io);
 var routerUsuario = usuarioRouterDB.router; //Se toma la ruta
 var UsuarioModel = usuarioRouterDB.model; //Se toma el modelo
 //Las rutas de alumno ocupan del modelo de carrera
-var routerAlumno = require('./server/routes/AlumnoRoutes')(io,CarreraModel,GrupoModel,UsuarioModel);
+var alumnoRouterDB = require('./server/routes/AlumnoRoutes')(io,CarreraModel,GrupoModel,UsuarioModel);
+var routerAlumno = alumnoRouterDB.router;
+var AlumnoModel = alumnoRouterDB.model;
 
 // middleware to use for all requests before executing
 app.use(function(req, res, next) {
@@ -55,7 +57,7 @@ app.use('/api', routerAlumno);
 app.use('/api', routerUsuario);
 
 
-var depositoRouter = require('./server/routes/DepositoRoutes')(io);
+var depositoRouter = require('./server/routes/DepositoRoutes')(io,AlumnoModel);
 app.use('/api', depositoRouter);
 
 // Catch all other routes and return the index file

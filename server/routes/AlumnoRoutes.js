@@ -105,9 +105,9 @@ module.exports = function(io, Carrera, Grupo, Usuario){
         });
     });
 
-    // POST /api/Alumno/
+    // POST /api/Alumno/buscar
     /*
-    * Entrega un listado completo de todos los registros
+    * Buscador por nombre, carrera y/o grupo
     */
     router.route('/Alumno/buscar')
     .post(function(req, res) {
@@ -204,7 +204,7 @@ module.exports = function(io, Carrera, Grupo, Usuario){
     .get(function(req, res) {
         var id = req.params.id;
         //Se busca por ID
-        Alumno.findById(id).populate('_usuario').exec(function(err,alumno) {
+        Alumno.findById(id).populate('_usuario').populate('_depositos').exec(function(err,alumno) {
             if (err){console.log(chalk.red('Error: '+err)); res.send(err);
             }else{
                 res.json(alumno);
@@ -284,7 +284,7 @@ module.exports = function(io, Carrera, Grupo, Usuario){
     });
 
 
-    return router;
+    return {router:router,model:Alumno}
 };
 
 function asociar_Grupo_Alumno(AlumnoDB, alumno, grupo,carrera, io){
