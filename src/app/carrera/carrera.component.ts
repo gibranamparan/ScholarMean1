@@ -71,7 +71,9 @@ export class CarreraComponent implements OnInit {
   }
   //Abre modal para confirmacion de eliminacion de registro
   confirmBorrarCarrera(id){
-    this._globalParams.configConfirmationModal(this.modal)
+    let carr = this.carreras.filter(carr=>carr._id == id)[0];
+    let regDesc:string = '<strong>Carrera:</strong> ' + carr.nombre + ' ('+carr.num+':'+carr.abreviacion+')'
+    this._globalParams.configConfirmationModal(this.modal,regDesc)
     .open().then((resultPromise)=>{
       resultPromise.result.then(
           (result)=>{

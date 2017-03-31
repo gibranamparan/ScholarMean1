@@ -75,11 +75,15 @@
 <!--<a href="{{'createPago/'+alumno._id}}">Nuevo Pago</a>
 
 <!--Listado de pagos-->
-<div class="panel panel-primary">
+<div class="panel panel-primary" *ngIf='nuevoAlumno._depositos'>
 	<div class="panel-heading">
 		<h3 class="panel-title">Listado de pagos</h3>
 	</div>
 	<div class="panel-body">
+		<div class="alert alert-warning">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<strong>No existen registros</strong> de pagos hechos por el preinscrito.
+		</div>
 		<table class="table table-hover table-stripped">
 			<thead>
 				<tr>

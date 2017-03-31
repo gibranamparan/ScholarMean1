@@ -25,14 +25,14 @@ export class GlobalParamsService {
 
   	//Prepara una ventana de confirmacion modal
   	//de 2 botones: OK y cancel
-  	configConfirmationModal(modal:Modal){
+  	configConfirmationModal(modal:Modal,regDesc?:string){
   		return modal.confirm()
 	    .size('sm')
 	    .isBlocking(true)
 	    .showClose(true)
 	    .keyboard(27)
 	    .title('Borrar')
-	    .body('¿Seguro que deseas borrar este registro?')
+	    .body('¿Seguro que deseas borrar este registro? '+regDesc)
 	    .okBtn('SI')
 	    .okBtnClass('btn btn-danger')
 	    .cancelBtn('Cancelar');

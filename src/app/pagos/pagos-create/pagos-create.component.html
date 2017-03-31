@@ -1,6 +1,17 @@
 <!-- datos de alumno -->
-<div id="datosAlumno">
+<div id="datosAlumno" >
 	<!--Aqui mostrar su nombre completo -->
+
+</div>
+<div class="panel panel-info" *ngIf='alumno'>
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			{{'Datos de '+(alumno._grupo?'Alumno':'Preinscrito')}}
+		</h3>
+	</div>
+	<div class="panel-body">
+		<strong>Nombre: </strong>{{alumno.NombreCompleto}}
+	</div>
 </div>
 <div class="panel panel-primary">
 	<div class="panel-heading">

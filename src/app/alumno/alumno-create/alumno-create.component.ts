@@ -87,12 +87,14 @@ export class AlumnoCreateComponent implements OnInit {
 		}
 
 		this._router.navigate(['alumno']);
-			if(!usuario)
-			{
-				this._router.navigate(['login']);
-			}else if(usuario.rol=='admin'){
-				this._router.navigate(['carrera']);
-			}
+		if(!usuario)//Si no hay usuario logeado
+		{
+			//Redireccion a login
+			this._router.navigate(['login']);
+		}else if(usuario.rol=='admin'){
+			//Redireccion a listado de preinscripciones
+			this._router.navigate(['alumno']);
+		}
 	}
 
 	agregarAlumno(){

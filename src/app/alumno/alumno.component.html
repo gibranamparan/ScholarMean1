@@ -21,10 +21,11 @@
 					<td>{{alumno._carrera?alumno._carrera.abreviacion:'--'}}</td>
 					<td>
 						<a href="{{'createAlumno/'+alumno._id}}">
-							<i class="glyphicon glyphicon-ok"></i>
+							<i class="glyphicon glyphicon-ok"></i> Confirmar
 						</a> | 
-						<i class="glyphicon glyphicon-remove"
-						(click)='confirmBorrarPreinscrito(alumno._id)'></i>
+						<a (click)='confirmBorrarPreinscrito(alumno._id)'>
+							<i class="glyphicon glyphicon-remove"></i> Cancelar
+						</a>
 					</td>
 				</tr>
 			</tbody>
