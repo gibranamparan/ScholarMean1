@@ -13,6 +13,7 @@ export class Alumno{
 		public createdAt?:Date,
 		public noMatricula?: String,
 		public _usuario?:any,
+		public _depositos?:any,
 	){ }
 
 	public get NombreCompleto(){

@@ -33,11 +33,6 @@ export class AlumnoService {
 		.map(res=>res.json())
 	}
 
-	getAlumnoByUserID(id){
-		return this._http.get(this.domain+'getUser/'+id)
-		.map(res=>res.json())
-	}
-
 	addAlumno(Alumno,User){
 		return this._http.post(this.domain,{alumno:Alumno,user:User})
 		.map(res=>res.json())

@@ -85,14 +85,14 @@ export class AlumnoCreateComponent implements OnInit {
 			//Si ya estaba registrado, solo se modifica
 			this.modificarAlumno();
 		}
+
+		this._router.navigate(['alumno']);
 			if(!usuario)
 			{
 				this._router.navigate(['login']);
 			}else if(usuario.rol=='admin'){
 				this._router.navigate(['carrera']);
 			}
-			
-		
 	}
 
 	agregarAlumno(){
