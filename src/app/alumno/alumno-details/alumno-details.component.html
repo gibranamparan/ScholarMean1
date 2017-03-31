@@ -1,45 +1,54 @@
-<div class="form-group container">
-	<div class="panel panel-success class">
-		<div class="panel-heading">	Alumno</div>
-			<div class="panel-body">
-				
-					<div class="form-group col-md-12">
-						<span>ID</span>
+<div><div class="col-md-2" align="center"> <img alt="User Pic" src="https://i1.wp.com/pbs.twimg.com/profile_images/2145925530/UTPP_avatar-01_200x200.jpg" class="img-circle img-responsive"></div></div>
 
-						
-					</div>
-					<div class="form-group col-md-12">
-						<span>Nombre</span>
-						
-					</div>
-					<div class="form-group col-md-12">
-						<span>Apellido Paterno</span>
-						
-					</div>
-					<div class="form-group col-md-12">
-						<span>Apellido Materno</span>
-						
-					</div>
-					<div class="form-group col-md-12">
-						<span>Fecha Nacimiento</span>
-						
-					</div>
-					<div class="form-group col-md-12">
-						<span>Carrera</span>
-						
-					</div>
-					<div class="form-group col-md-12">
-						<span>Grupo</span>
-						
-					</div>
-					<div class="form-group col-md-12">
-						<span>noMatricula</span>
-						
-					</div>
-				
-			</div>
-	</div>		
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 15px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    font-size: large;
+
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+<div class="jumbotron">
+    <div class="container">
+<table>
+<h1>Alumno</h1>    
+  <tr>
+    <th>Nombre</th>
+    <td>{{alumno.Nombre}} {{alumno.ApellidoP}} {{alumno.ApellidoM}}</td>
+
+  </tr>
+  <tr>
+    <th>Fecha Nacimiento</th>
+    <td>{{alumno.FechaNac}}</td>
+  </tr>
+  <tr>
+    <th>Carrera</th>
+    <td  *ngIf='alumno._carrera'>{{alumno._carrera.nombre}}</td>
+  </tr>
+  <tr>
+    <th>Grupo</th>
+    <td>{{(alumno._grupo?alumno._grupo.nombre:'Tu inscripcion no ha sido aprobada')}}</td>
+  </tr>
+  <tr>
+    <th>noMatricula</th>
+    <td>{{alumno.noMatricula}}</td>
+  </tr>
+</table>
+       
+    </div>
 </div>
+				
 
 <!--Listado de pagos-->
 <div class="panel panel-primary">
