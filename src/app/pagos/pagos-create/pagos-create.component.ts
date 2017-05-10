@@ -66,7 +66,7 @@ export class PagosCreateComponent implements OnInit {
 		.subscribe(
 			(data:Pago)=>{
 				//Si el pago se dio de alta satisfactoriamente
-				this._router.navigate(['pagosList'])
+				this._router.navigate(['createAlumno/', this.nuevoPago._alumno])
 			},
 			error=>alert(error),
 			()=>console.log('done!')

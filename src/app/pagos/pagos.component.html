@@ -10,9 +10,9 @@
 		<th>Alumno</th>
 	</tr>
 	<tr *ngFor='let pago of pagos'>
-		<td>{{pago.monto}}</td>
+		<td>${{pago.monto}}</td>
 		<td>{{pago.fecha}}</td>
-		<td>XYZ</td>
+		<td>{{pago._alumno.Nombre}}</td>
 		<td>
 			<a href="">
 				<i class="glyphicon glyphicon-list" aria-hidden="true"></i> Lista

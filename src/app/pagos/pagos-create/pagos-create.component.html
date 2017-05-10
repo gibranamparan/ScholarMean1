@@ -10,7 +10,10 @@
 		</h3>
 	</div>
 	<div class="panel-body">
-		<strong>Nombre: </strong>{{alumno.NombreCompleto}}
+		<strong>Nombre: </strong>{{alumno.Nombre}}
+		<br><strong>Fecha de nacimiento: </strong>{{alumno.FechaNac | date : 'dd-MM-yyyy'}}
+		<br><strong>Carrera: </strong><span *ngIf='alumno._carrera'>{{alumno._carrera.nombre}}</span>
+		<br><strong>Grupo: </strong><span *ngIf='alumno._grupo'>{{alumno._grupo.nombre}}</span>
 	</div>
 </div>
 <div class="panel panel-primary">

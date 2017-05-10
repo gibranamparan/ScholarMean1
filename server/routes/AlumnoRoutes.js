@@ -204,7 +204,7 @@ module.exports = function(io, Carrera, Grupo, Usuario){
     .get(function(req, res) {
         var id = req.params.id;
         //Se busca por ID
-        Alumno.findById(id).populate('_usuario').populate('_depositos').exec(function(err,alumno) {
+        Alumno.findById(id).populate('_usuario').populate('_depositos').populate('_carrera').populate('_grupo').exec(function(err,alumno) {
             if (err){console.log(chalk.red('Error: '+err)); res.send(err);
             }else{
                 res.json(alumno);

@@ -14,9 +14,10 @@ module.exports = function(io, Alumno){
 	//GET localhost:8000/api/Depositos
 	router.route("/Depositos")
 		.get(function(req,res){
-			Deposito.find().populate('_alumnoID').exec(function(err,depositos){
+			Deposito.find().populate('_alumno').exec(function(err,depositos){
 				if(err){res.send(err);}
 				else{
+					console.log(depositos)
 					res.json(depositos);
 				}
 			});

@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PagosComponent } from './pagos.component';
 import { PagosCreateComponent } from './pagos-create/pagos-create.component';
+import { AlumnoCreateComponent } from '../alumno/alumno-create/alumno-create.component';
 
 const routes: Routes = [
 	{ path:'pagosList', component:PagosComponent} ,
+	{path: 'createAlumno/:id', component: AlumnoCreateComponent},
 	{ path:'createPago', component:PagosCreateComponent}, 
 	{ path:'createPago/:id', component:PagosCreateComponent}
 ];
