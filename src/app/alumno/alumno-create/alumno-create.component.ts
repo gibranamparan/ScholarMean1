@@ -14,7 +14,7 @@ import * as moment from 'moment';
 
 
 
-@Component({
+@Component({ 
   selector: 'app-alumno-create',
   templateUrl: './alumno-create.component.html',
   styleUrls: ['./alumno-create.component.css']
@@ -126,6 +126,7 @@ export class AlumnoCreateComponent implements OnInit {
 	confirmarInscripcion(){
 		this.modificarAlumno();
 		this._alumnoService.registrarAlumno(this.nuevoAlumno._id)
+		
 		.subscribe(
 			(data:Grupo)=>{
 				this._router.navigate(['alumno']);

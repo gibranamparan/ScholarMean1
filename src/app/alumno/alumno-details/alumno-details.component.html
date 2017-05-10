@@ -8,7 +8,7 @@ table {
 }
 
 td, th {
-    border: 15px solid #dddddd;
+    border: 0px solid #dddddd;
     text-align: left;
     padding: 8px;
     font-size: large;
@@ -21,8 +21,7 @@ tr:nth-child(even) {
 </style>
 <div class="jumbotron">
     <div class="container">
-<table>
-<h1>Alumno</h1>    
+<table>    
   <tr>
     <th>Nombre</th>
     <td>{{alumno.Nombre}} {{alumno.ApellidoP}} {{alumno.ApellidoM}}</td>
@@ -30,7 +29,7 @@ tr:nth-child(even) {
   </tr>
   <tr>
     <th>Fecha Nacimiento</th>
-    <td>{{alumno.FechaNac}}</td>
+    <td>{{alumno.FechaNac | date:'dd/MM/yyyy'}}</td>
   </tr>
   <tr>
     <th>Carrera</th>
@@ -56,7 +55,7 @@ tr:nth-child(even) {
 		<h3 class="panel-title">Resultado</h3>
 	</div>
 	<div class="panel-body">
-		<table class="table table-hover table-stripped">
+		<!--<table class="table table-hover table-stripped">
 			<thead>
 				<tr>
 					<th>Monto</th>
@@ -69,6 +68,6 @@ tr:nth-child(even) {
 					<td>{{deposito.fecha}}</td>
 				</tr>
 			</tbody>
-		</table>
+		</table>-->
 	</div>
 </div>

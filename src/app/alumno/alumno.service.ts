@@ -8,7 +8,7 @@ export enum AlumnoStatus{
 	EnRegistro=1, Preinscrito, Inscrito	
 }
 
-@Injectable()
+@Injectable() 
 export class AlumnoService {
 
   constructor(private _http:Http,
@@ -32,6 +32,12 @@ export class AlumnoService {
 		return this._http.get(this.domain+id)
 		.map(res=>res.json())
 	}
+	
+	getAlumnoByUserID(id){
+		return this._http.get(this.domain+'getUser/'+id)
+		.map(res=>res.json())
+	}
+
 
 	addAlumno(Alumno,User){
 		return this._http.post(this.domain,{alumno:Alumno,user:User})
@@ -79,4 +85,4 @@ export class AlumnoService {
 		return AlumnosList;
 	}
 
-}
+} 

@@ -37,9 +37,9 @@
             <!-- -->
 
             <!-- PROFILE SUB-MENU -->
-            <li *ngIf='usuario.rol=="admin"||usuario.rol=="alumno"' routerLinkActive="active">
+           <!-- <li *ngIf='usuario.rol=="admin"||usuario.rol=="alumno"' routerLinkActive="active">
                 <i class="fa fa-user fa-lg"></i> Profile
-            </li>
+            </li> -->
             <li (click)='logout()' routerLinkActive="active"> 
                 <i class="fa fa-key" aria-hidden="true"></i> <a  routerLink='login'>Logout</a>
             </li>

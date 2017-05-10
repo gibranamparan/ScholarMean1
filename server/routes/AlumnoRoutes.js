@@ -26,7 +26,7 @@ module.exports = function(io, Carrera, Grupo, Usuario){
             ApellidoM:req.body.alumno.ApellidoM,
             FechaNac:req.body.alumno.FechaNac,
             _carrera: req.body.alumno._carrera,
-            _grupo:'',
+            _grupo:req.body.alumno._grupo,
             _usuario: nuevoUsuario._id
         });
 
@@ -212,6 +212,21 @@ module.exports = function(io, Carrera, Grupo, Usuario){
         });
     });
 
+     router.route('/Alumno/getUser/:id')
+    .get(function(req, res) {
+        var id = req.params.id;
+
+        //Se busca por ID
+        Alumno.findOne({_usuario:id}).populate('_usuario').populate('_carrera').populate('_grupo').exec(function(err,alumno) {
+        
+            if (err){console.log(chalk.red('Error: '+err)); res.send(err);
+            }else{
+                res.json(alumno);
+            }
+        });
+    });
+
+
     // GET /api/Alumno/registrarAlumno:id
     /*
     * Se confirma la inscripcion de un estudiante, registrandolo a un grupo
@@ -284,7 +299,7 @@ module.exports = function(io, Carrera, Grupo, Usuario){
     });
 
 
-    return {router:router,model:Alumno}
+     return {router:router,model:Alumno}
 };
 
 function asociar_Grupo_Alumno(AlumnoDB, alumno, grupo,carrera, io){
