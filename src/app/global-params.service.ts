@@ -15,8 +15,8 @@ export class GlobalParamsService {
 		lastOnBottom: true
 	};
 
-	public readonly domain='http://localhost:8000';
-	//public readonly domain='https://scholarnode.herokuapp.com';
+	//public readonly domain='http://localhost:8000';
+	public readonly domain='https://scholarnode.herokuapp.com';
 
   	constructor() { }
   	showNavBar(modo:boolean) {
