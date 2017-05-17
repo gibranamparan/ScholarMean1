@@ -18,6 +18,7 @@ export class PagosBuscadorComponent implements OnInit {
   	private _alumnoService:AlumnoService) { }
 
   ngOnInit() {
+    this.showPagos();
   }
 
   showPagosBusqueda(){
@@ -27,6 +28,15 @@ export class PagosBuscadorComponent implements OnInit {
   		error=>alert(error),
   		()=>console.log(JSON.stringify(this.filtro))
   	);
+  }
+
+  showPagos(){
+    this._pagosService.getPagos()
+    .subscribe(
+      data=>{ this.Pagos = data; },
+      error=>alert(error),
+      ()=>console.log('done!')
+    );
   }
 
 mostrarFiltro(){
