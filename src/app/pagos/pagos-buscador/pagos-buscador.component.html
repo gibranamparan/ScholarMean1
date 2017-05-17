@@ -1,0 +1,9 @@
+<div class="panel panel-primary">
+	<div class="panel-body">
+		<form #filtroForm='ngForm' (submit)='showPagosBusqueda()' class="form-inline" role="form">
+			<input type="date" id="inicio" name="inicio" [(ngModel)]='filtro.inicio' #inicio='ngModel'>
+			<input type="date" id="final" name="final" [(ngModel)]='filtro.final' #final='ngModel'>
+			<button type="submit" class="btn btn-primary pull-right">Buscar</button>
+		</form>
+	</div>
+</div>

@@ -7,6 +7,7 @@ import { SimpleNotificationsModule, NotificationsService} from 'angular2-notific
 import { FormsModule } from '@angular/forms';
 //import { PagosComponent } from './pagos/pagos.component';
 import { PagosCreateComponent } from './pagos-create/pagos-create.component';
+import { PagosBuscadorComponent } from './pagos-buscador/pagos-buscador.component';
 //import { SimpleListComponent } from './simple-list/simple-list.component';
 
 
@@ -16,7 +17,7 @@ import { PagosCreateComponent } from './pagos-create/pagos-create.component';
     PagosRoutingModule,
     SimpleNotificationsModule,FormsModule
   ],
-  declarations: [PagosComponent, PagosComponent, PagosCreateComponent],
+  declarations: [PagosComponent, PagosComponent, PagosCreateComponent, PagosBuscadorComponent],
   providers: [PagosService, NotificationsService],
 })
 export class PagosModule { }

@@ -102,5 +102,43 @@ module.exports = function(io, Alumno){
 			});
 	});
 
+	// POST /api/Depositos/buscar
+    /*
+    * Buscador por fechas
+    */
+    router.route('/Depositos/buscar')
+    .post(function(req, res) {
+    	console.log("tambien llego");
+        //var regexNombre = new RegExp(req.body.Nombre,'i');
+        var inicio = new Date(req.body.inicio);
+        var final = new Date(req.body.final);
+        console.log(chalk.blue('Inicio:')+chalk.red(inicio));
+        console.log(chalk.blue('Final:')+chalk.red(final));
+
+
+        //Listado de todas las Alumnos
+        /*Alumno.find({
+            $and:[
+                {_carrera:req.body._carrera?req.body._carrera:{$ne:null}},
+                {_grupo:req.body._grupo?req.body._grupo:{$ne:null}},
+                {$or:[
+                    {ApellidoM:regexNombre},
+                    {ApellidoP:regexNombre},
+                    {Nombre:regexNombre},
+                ]}
+            ]
+        })*/
+        Deposito.find({ 
+        	createdAt: { $gte:inicio, $lt:final } })
+        .populate("_alumno")
+        .exec(function(err,Depositos) {
+            if (err){console.log(chalk.red('Error: '+err));res.send(err);}
+            else{
+            	console.log(Depositos)
+                res.json(Depositos);
+            }
+        });
+    });
+
 	return router;
 };

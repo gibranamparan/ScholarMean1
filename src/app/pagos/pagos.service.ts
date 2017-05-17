@@ -19,6 +19,12 @@ export class PagosService {
 		.map(res=>res.json())
 	}
 
+	getPagosByFecha(filtro){
+		console.log("llego");
+		return this._http.post(this.domain+'buscar',filtro)
+		.map(res=>res.json())
+	}
+
 	addPago(Pago){
 		return this._http.post(this.domain,Pago)
 		.map(res=>res.json())
